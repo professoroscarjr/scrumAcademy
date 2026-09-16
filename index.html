@@ -43,1301 +43,1225 @@
             background: #94a3b8;
         }
         .tab-btn.active {
-            border-bottom: 3px solid #6366f1;
-            color: #4f46e5;
+            background-color: #4f46e5;
+            color: #ffffff;
             font-weight: 700;
+            border-left: 4px solid #818cf8;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col md:flex-row">
 
-    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+    <!-- SIDEBAR HEADER (LATERAL NA ESQUERDA EM DESKTOP) -->
+    <header class="bg-slate-900 text-white shadow-xl w-full md:w-64 lg:w-72 md:min-h-screen md:sticky md:top-0 z-50 flex flex-col justify-between shrink-0">
+        <div>
+            <div class="p-4 md:p-6 flex justify-between md:flex-col items-center md:items-start border-b border-slate-800 md:border-b-0">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white shadow-md">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white shadow-md shrink-0">
                         <i class="fa-solid fa-rotate text-lg"></i>
                     </div>
                     <div>
                         <h1 class="font-bold text-lg sm:text-xl tracking-tight leading-none">Scrum Academy</h1>
-                        <p class="text-xs text-slate-400 font-medium">Aprenda a Metodologia Ágil na Prática</p>
+                        <p class="text-xs text-slate-400 font-medium mt-1">Aprenda Ágil na Prática</p>
                     </div>
                 </div>
-
-                <!-- Navigation Tabs -->
-                <nav class="hidden md:flex space-x-1 sm:space-x-4">
-                    <button onclick="switchTab('simulador')" id="nav-simulador" class="tab-btn active px-3 py-2 text-sm font-medium text-slate-300 hover:text-white transition">
-                        <i class="fa-solid fa-gamepad mr-1.5"></i>Simulador de Sprint
-                    </button>
-                    <button onclick="switchTab('papeis')" id="nav-papeis" class="tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-white transition">
-                        <i class="fa-solid fa-users mr-1.5"></i>Atores & Papéis
-                    </button>
-                    <button onclick="switchTab('etapas')" id="nav-etapas" class="tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-white transition">
-                        <i class="fa-solid fa-list-check mr-1.5"></i>Ceremônias & Artefatos
-                    </button>
-                    <button onclick="switchTab('storypoints')" id="nav-storypoints" class="tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-white transition">
-                        <i class="fa-solid fa-calculator mr-1.5"></i>Story Points
-                    </button>
-                    <button onclick="switchTab('quiz')" id="nav-quiz" class="tab-btn px-3 py-2 text-sm font-medium text-slate-300 hover:text-white transition">
-                        <i class="fa-solid fa-graduation-cap mr-1.5"></i>Quiz de Conhecimento
-                    </button>
-                </nav>
 
                 <!-- Mobile menu toggle -->
                 <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
+
+            <!-- Navigation Tabs (Vertical Sidebar) -->
+            <nav id="mobile-menu" class="hidden md:flex flex-col space-y-1.5 p-4">
+                <button onclick="switchTab('simulador')" id="nav-simulador" class="tab-btn active w-full text-left px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition flex items-center gap-3">
+                    <i class="fa-solid fa-gamepad text-base w-5 text-center"></i>
+                    <span>Simulador de Sprint</span>
+                </button>
+                <button onclick="switchTab('papeis')" id="nav-papeis" class="tab-btn w-full text-left px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition flex items-center gap-3">
+                    <i class="fa-solid fa-users text-base w-5 text-center"></i>
+                    <span>Atores & Papéis</span>
+                </button>
+                <button onclick="switchTab('etapas')" id="nav-etapas" class="tab-btn w-full text-left px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition flex items-center gap-3">
+                    <i class="fa-solid fa-list-check text-base w-5 text-center"></i>
+                    <span>Ceremônias & Artefatos</span>
+                </button>
+                <button onclick="switchTab('storypoints')" id="nav-storypoints" class="tab-btn w-full text-left px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition flex items-center gap-3">
+                    <i class="fa-solid fa-calculator text-base w-5 text-center"></i>
+                    <span>Story Points</span>
+                </button>
+                <button onclick="switchTab('quiz')" id="nav-quiz" class="tab-btn w-full text-left px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition flex items-center gap-3">
+                    <i class="fa-solid fa-graduation-cap text-base w-5 text-center"></i>
+                    <span>Quiz de Conhecimento</span>
+                </button>
+            </nav>
         </div>
 
-        <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-t border-slate-700 px-4 py-3 space-y-2">
-            <button onclick="switchTab('simulador'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-slate-700">
-                <i class="fa-solid fa-gamepad w-6"></i>Simulador de Sprint
-            </button>
-            <button onclick="switchTab('papeis'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-slate-700">
-                <i class="fa-solid fa-users w-6"></i>Atores & Papéis
-            </button>
-            <button onclick="switchTab('etapas'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-slate-700">
-                <i class="fa-solid fa-list-check w-6"></i>Ceremônias & Artefatos
-            </button>
-            <button onclick="switchTab('storypoints'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-slate-700">
-                <i class="fa-solid fa-calculator w-6"></i>Story Points
-            </button>
-            <button onclick="switchTab('quiz'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-slate-700">
-                <i class="fa-solid fa-graduation-cap w-6"></i>Quiz de Conhecimento
-            </button>
+        <!-- Sidebar Info Card -->
+        <div class="hidden md:block px-4 py-3 m-4 bg-indigo-950/70 rounded-xl border border-indigo-800/60 text-xs text-indigo-100 space-y-2">
+            <span class="inline-block bg-indigo-500/30 text-indigo-300 text-[10px] font-bold px-2 py-0.5 rounded border border-indigo-400/30 uppercase tracking-wider">
+                Experiência Prática Interativa
+            </span>
+            <h3 class="font-bold text-sm text-white leading-snug">Simulador de Sprint Ágil</h3>
+            <p class="text-slate-300 leading-relaxed text-[11px]">
+                Vivencie o ciclo de vida completo de uma Sprint de 2 semanas. Tome decisões como Product Owner, enfrente impedimentos com o Scrum Master e entregue um incremento de valor!
+            </p>
+        </div>
+
+        <!-- Sidebar Footer Info Box -->
+        <div class="hidden md:block p-4 m-4 mt-0 bg-slate-800/80 rounded-xl border border-slate-700/60 text-xs text-slate-400">
+            <div class="flex items-center gap-2 text-indigo-400 font-semibold mb-1">
+                <i class="fa-solid fa-lightbulb"></i> Dica Ágil
+            </div>
+            <p class="leading-relaxed">Sprints curtas diminuem riscos e aceleram o aprendizado com feedbacks constantes.</p>
         </div>
     </header>
 
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
-
-        <!-- ========================================== -->
-        <!-- TAB 1: SIMULADOR INTERATIVO                -->
-        <!-- ========================================== -->
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full overflow-x-hidden">
+        
+        <!-- ================= TAB 1: SIMULADOR DE SPRINT ================= -->
         <section id="tab-simulador" class="space-y-6">
-            <!-- Simulator Banner -->
-            <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
-                <div class="relative z-10 max-w-3xl">
-                    <span class="bg-indigo-500/30 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full border border-indigo-400/30 uppercase tracking-wider">
-                        Experiência Prática Interativa
-                    </span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold mt-3">Simulador de Sprint Ágil</h2>
-                    <p class="text-indigo-200 text-sm sm:text-base mt-2">
-                        Vivencie o ciclo de vida completo de uma Sprint de 2 semanas. Tome decisões como Product Owner, enfrente impedimentos com o Scrum Master e entregue um incremento de valor!
-                    </p>
+            <div class="bg-gradient-to-r from-indigo-700 via-indigo-800 to-purple-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
+                    <i class="fa-solid fa-rotate"></i>
                 </div>
-                <div class="absolute -right-6 -bottom-6 opacity-10 text-9xl">
-                    <i class="fa-solid fa-diagram-project"></i>
+                <div class="relative z-10 max-w-3xl">
+                    <span class="inline-block bg-indigo-500/30 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-2 border border-indigo-400/30">
+                        Simulação Prática de Sprint
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Vivencie uma Sprint na Prática</h2>
+                    <p class="mt-2 text-indigo-100 text-sm sm:text-base leading-relaxed">
+                        Acompanhe os 5 passos fundamentais de uma Sprint de 2 semanas (10 dias úteis). Assuma responsabilidades, gerencie pontos e solucione impedimentos do time!
+                    </p>
                 </div>
             </div>
 
             <!-- Stepper Progress Bar -->
-            <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
-                <div class="flex justify-between items-center text-xs font-semibold text-slate-500 mb-2">
-                    <span id="step-label">Passo 1 de 5: Visão & Backlog</span>
-                    <span id="step-percent">20% Concluído</span>
-                </div>
-                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-                    <div id="sim-progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-500" style="width: 20%"></div>
-                </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm overflow-x-auto custom-scrollbar">
+                <div class="flex justify-between items-center min-w-[600px]">
+                    <!-- Step 1 Nav -->
+                    <button onclick="goToStep(1)" id="step-nav-1" class="step-nav-btn flex items-center gap-2 text-indigo-600 font-bold">
+                        <span id="step-num-1" class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">1</span>
+                        <span class="text-xs sm:text-sm">1. Product Backlog</span>
+                    </button>
+                    <div class="h-0.5 w-8 bg-slate-200"></div>
 
-                <!-- Step Tabs / Indicators -->
-                <div class="grid grid-cols-5 gap-1 sm:gap-2 mt-4 text-center">
-                    <button onclick="loadSimStep(1)" id="sim-step-btn-1" class="p-2 rounded-lg bg-indigo-50 text-indigo-700 font-bold text-xs flex flex-col items-center gap-1 border border-indigo-200">
-                        <span class="w-5 h-5 rounded-full bg-indigo-600 text-white text-xs flex items-center justify-center">1</span>
-                        <span class="hidden sm:inline">1. Backlog</span>
+                    <!-- Step 2 Nav -->
+                    <button onclick="goToStep(2)" id="step-nav-2" class="step-nav-btn flex items-center gap-2 text-slate-400 font-medium">
+                        <span id="step-num-2" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">2</span>
+                        <span class="text-xs sm:text-sm">2. Sprint Planning</span>
                     </button>
-                    <button onclick="loadSimStep(2)" id="sim-step-btn-2" class="p-2 rounded-lg bg-slate-50 text-slate-500 text-xs flex flex-col items-center gap-1 border border-slate-200 hover:bg-slate-100">
-                        <span class="w-5 h-5 rounded-full bg-slate-300 text-slate-700 text-xs flex items-center justify-center">2</span>
-                        <span class="hidden sm:inline">2. Planning</span>
+                    <div class="h-0.5 w-8 bg-slate-200"></div>
+
+                    <!-- Step 3 Nav -->
+                    <button onclick="goToStep(3)" id="step-nav-3" class="step-nav-btn flex items-center gap-2 text-slate-400 font-medium">
+                        <span id="step-num-3" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">3</span>
+                        <span class="text-xs sm:text-sm">3. Execução & Daily</span>
                     </button>
-                    <button onclick="loadSimStep(3)" id="sim-step-btn-3" class="p-2 rounded-lg bg-slate-50 text-slate-500 text-xs flex flex-col items-center gap-1 border border-slate-200 hover:bg-slate-100">
-                        <span class="w-5 h-5 rounded-full bg-slate-300 text-slate-700 text-xs flex items-center justify-center">3</span>
-                        <span class="hidden sm:inline">3. Execution</span>
+                    <div class="h-0.5 w-8 bg-slate-200"></div>
+
+                    <!-- Step 4 Nav -->
+                    <button onclick="goToStep(4)" id="step-nav-4" class="step-nav-btn flex items-center gap-2 text-slate-400 font-medium">
+                        <span id="step-num-4" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">4</span>
+                        <span class="text-xs sm:text-sm">4. Sprint Review</span>
                     </button>
-                    <button onclick="loadSimStep(4)" id="sim-step-btn-4" class="p-2 rounded-lg bg-slate-50 text-slate-500 text-xs flex flex-col items-center gap-1 border border-slate-200 hover:bg-slate-100">
-                        <span class="w-5 h-5 rounded-full bg-slate-300 text-slate-700 text-xs flex items-center justify-center">4</span>
-                        <span class="hidden sm:inline">4. Review</span>
-                    </button>
-                    <button onclick="loadSimStep(5)" id="sim-step-btn-5" class="p-2 rounded-lg bg-slate-50 text-slate-500 text-xs flex flex-col items-center gap-1 border border-slate-200 hover:bg-slate-100">
-                        <span class="w-5 h-5 rounded-full bg-slate-300 text-slate-700 text-xs flex items-center justify-center">5</span>
-                        <span class="hidden sm:inline">5. Retro</span>
+                    <div class="h-0.5 w-8 bg-slate-200"></div>
+
+                    <!-- Step 5 Nav -->
+                    <button onclick="goToStep(5)" id="step-nav-5" class="step-nav-btn flex items-center gap-2 text-slate-400 font-medium">
+                        <span id="step-num-5" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">5</span>
+                        <span class="text-xs sm:text-sm">5. Retrospectiva</span>
                     </button>
                 </div>
             </div>
 
-            <!-- SIMULATOR DYNAMIC CONTENT CONTAINER -->
-            <div id="sim-content" class="bg-white rounded-xl shadow-md border border-slate-200 p-6">
-                <!-- Step content rendered via JS -->
+            <!-- STEP 1 CONTENT: Product Backlog -->
+            <div id="step-content-1" class="sim-step-content bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-4 gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 text-purple-600 font-semibold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-user-gear"></i> Papel Ativo: Product Owner (PO)
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">Passo 1: Visualização do Product Backlog</h3>
+                    </div>
+                    <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-list"></i> 5 Histórias Priorizadas
+                    </span>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 rounded-xl p-4 text-purple-900 text-sm leading-relaxed flex items-start gap-3">
+                    <i class="fa-solid fa-info-circle text-purple-600 text-lg shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong>O que acontece nesta etapa?</strong> O Product Owner mantém a lista de desejos do produto organizada por prioridade e valor de negócio. Cada funcionalidade possui uma estimativa relativa em <strong>Story Points</strong> feita pelo time.
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="backlog-cards-container">
+                    <!-- Cards representativos do backlog -->
+                </div>
+
+                <div class="flex justify-end">
+                    <button onclick="nextStep()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition flex items-center gap-2">
+                        <span>Avançar para Sprint Planning</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2 CONTENT: Sprint Planning -->
+            <div id="step-content-2" class="sim-step-content hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-4 gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 text-cyan-600 font-semibold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-users"></i> Papel Ativo: Scrum Team (PO + SM + Devs)
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">Passo 2: Sprint Planning</h3>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="bg-slate-100 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700">
+                            Capacidade da Sprint: <strong class="text-indigo-600 text-sm">13 Points</strong>
+                        </div>
+                        <div class="bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-lg text-xs font-medium text-indigo-800">
+                            Selecionados: <strong id="selected-points-counter" class="text-indigo-600 text-sm">0</strong> / 13
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-cyan-50 border border-cyan-200 rounded-xl p-4 text-cyan-900 text-sm leading-relaxed flex items-start gap-3">
+                    <i class="fa-solid fa-bullseye text-cyan-600 text-lg shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong>Selecione as Histórias do Backlog!</strong> Escolha as tarefas que cabem na capacidade da Sprint sem ultrapassar <strong>13 Story Points</strong>.
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="planning-cards-container">
+                    <!-- Cards interativos de seleção -->
+                </div>
+
+                <div id="planning-alert" class="hidden p-4 rounded-xl text-sm font-medium"></div>
+
+                <div class="flex justify-between items-center">
+                    <button onclick="prevStep()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2.5 rounded-xl transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Voltar
+                    </button>
+                    <button onclick="startSprintExecution()" id="btn-start-sprint" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition flex items-center gap-2">
+                        <i class="fa-solid fa-play"></i>
+                        <span>Iniciar Execução da Sprint</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 3 CONTENT: Execution & Daily -->
+            <div id="step-content-3" class="sim-step-content hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-4 gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 text-emerald-600 font-semibold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-code"></i> Papel Ativo: Desenvolvedores & Scrum Master
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">Passo 3: Execução & Daily Scrum</h3>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                            <i class="fa-regular fa-calendar-check"></i> Dia <span id="current-day-display">1</span> de 10
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Simulation Controls & Progress Bar -->
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <div>
+                            <p class="text-xs text-slate-400 uppercase font-semibold">Progresso da Sprint (10 Dias)</p>
+                            <h4 id="daily-status-title" class="font-bold text-lg">Sprint em Andamento...</h4>
+                        </div>
+                        <button onclick="advanceDay()" id="btn-advance-day" class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold px-5 py-2.5 rounded-xl transition flex items-center gap-2 text-sm shadow-md">
+                            <i class="fa-solid fa-forward-step"></i>
+                            <span>Avançar 1 Dia</span>
+                        </button>
+                    </div>
+
+                    <!-- Progress bar track -->
+                    <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                        <div id="sprint-progress-bar" class="bg-emerald-400 h-full w-[10%] transition-all duration-300"></div>
+                    </div>
+                </div>
+
+                <!-- Impediment Card Popup -->
+                <div id="impediment-box" class="hidden bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 space-y-3">
+                    <div class="flex items-center gap-2 text-amber-800 font-bold text-base">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600 text-xl"></i>
+                        <span>Impedimento Encontrado! (Papel do Scrum Master)</span>
+                    </div>
+                    <p id="impediment-text" class="text-sm text-amber-900 leading-relaxed"></p>
+                    <button onclick="resolveImpediment()" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>Remover Impedimento (Scrum Master)</span>
+                    </button>
+                </div>
+
+                <!-- Kanban Board -->
+                <div>
+                    <h4 class="font-bold text-slate-700 mb-3 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-table-columns text-indigo-500"></i> Quadro Kanban da Sprint
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <h5 class="text-xs font-bold uppercase text-slate-500 mb-3 flex items-center justify-between">
+                                <span>A Fazer (To Do)</span>
+                                <span id="count-todo" class="bg-slate-200 text-slate-700 rounded-full px-2 py-0.5 text-[10px]">0</span>
+                            </h5>
+                            <div id="kanban-todo" class="space-y-2 min-h-[100px]"></div>
+                        </div>
+
+                        <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-200">
+                            <h5 class="text-xs font-bold uppercase text-blue-600 mb-3 flex items-center justify-between">
+                                <span>Em Progresso (Doing)</span>
+                                <span id="count-doing" class="bg-blue-200 text-blue-800 rounded-full px-2 py-0.5 text-[10px]">0</span>
+                            </h5>
+                            <div id="kanban-doing" class="space-y-2 min-h-[100px]"></div>
+                        </div>
+
+                        <div class="bg-emerald-50/50 p-4 rounded-xl border border-emerald-200">
+                            <h5 class="text-xs font-bold uppercase text-emerald-600 mb-3 flex items-center justify-between">
+                                <span>Concluído (Done)</span>
+                                <span id="count-done" class="bg-emerald-200 text-emerald-800 rounded-full px-2 py-0.5 text-[10px]">0</span>
+                            </h5>
+                            <div id="kanban-done" class="space-y-2 min-h-[100px]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                    <button onclick="prevStep()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2.5 rounded-xl transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Voltar
+                    </button>
+                    <button onclick="nextStep()" id="btn-to-review" disabled class="opacity-50 cursor-not-allowed bg-indigo-600 text-white font-semibold px-6 py-3 rounded-xl transition flex items-center gap-2">
+                        <span>Ir para Sprint Review</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 4 CONTENT: Sprint Review -->
+            <div id="step-content-4" class="sim-step-content hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-4 gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 text-amber-600 font-semibold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-eye"></i> Papel Ativo: Scrum Team + Stakeholders
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">Passo 4: Sprint Review & Demonstração</h3>
+                    </div>
+                    <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-box-open"></i> Incremento do Produto
+                    </span>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-amber-900 text-sm leading-relaxed flex items-start gap-3">
+                    <i class="fa-solid fa-users-viewfinder text-amber-600 text-lg shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong>Apresentação do Incremento aos Stakeholders:</strong> O time demonstra o software pronto e funcional (atendendo à <em>Definition of Done</em>). Os Stakeholders fornecem feedback valioso para os próximos ciclos.
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-4">
+                    <h4 class="font-bold text-slate-800 text-base">Resultado do Incremento Entregue nesta Sprint:</h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                            <p class="text-xs text-slate-500 font-medium">Pontos Planejados</p>
+                            <p id="review-planned-pts" class="text-2xl font-black text-slate-800">0 pts</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200">
+                            <p class="text-xs text-slate-500 font-medium">Pontos Entregues com Sucesso</p>
+                            <p id="review-delivered-pts" class="text-2xl font-black text-emerald-600">0 pts</p>
+                        </div>
+                    </div>
+
+                    <div id="stakeholder-feedback-card" class="bg-indigo-900 text-white p-5 rounded-xl space-y-2">
+                        <div class="flex items-center gap-2 text-indigo-300 font-bold text-xs uppercase">
+                            <i class="fa-solid fa-comment-dots"></i> Feedback dos Stakeholders
+                        </div>
+                        <p id="stakeholder-feedback-text" class="text-sm text-indigo-100 italic">
+                            "Aguardando análise da demonstração do incremento..."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button onclick="prevStep()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2.5 rounded-xl transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Voltar
+                    </button>
+                    <button onclick="nextStep()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition flex items-center gap-2">
+                        <span>Avançar para Retrospectiva</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 5 CONTENT: Retrospective -->
+            <div id="step-content-5" class="sim-step-content hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-4 gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 text-indigo-600 font-semibold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-comments"></i> Papel Ativo: Scrum Team Interno
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800">Passo 5: Sprint Retrospective</h3>
+                    </div>
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-seedling"></i> Melhoria Contínua
+                    </span>
+                </div>
+
+                <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-indigo-900 text-sm leading-relaxed flex items-start gap-3">
+                    <i class="fa-solid fa-heart-pulse text-indigo-600 text-lg shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong>Inspecionar e Adaptar o Processo:</strong> O time Scrum avalia como foi a Sprint em relação a pessoas, relacionamentos, ferramentas e processos. Escolha um plano de ação para a próxima Sprint:
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button onclick="selectActionPlan('pair')" id="action-plan-pair" class="action-plan-btn p-5 border-2 border-slate-200 rounded-2xl text-left hover:border-indigo-500 transition space-y-2 bg-slate-50">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-user-group"></i>
+                        </div>
+                        <h5 class="font-bold text-slate-800 text-sm">Aumentar Pair Programming</h5>
+                        <p class="text-xs text-slate-500">Desenvolvedores mais experientes pareiam com juniores para reduzir erros de código.</p>
+                    </button>
+
+                    <button onclick="selectActionPlan('refine')" id="action-plan-refine" class="action-plan-btn p-5 border-2 border-slate-200 rounded-2xl text-left hover:border-indigo-500 transition space-y-2 bg-slate-50">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-filter"></i>
+                        </div>
+                        <h5 class="font-bold text-slate-800 text-sm">Melhorar Refinamento do Backlog</h5>
+                        <p class="text-xs text-slate-500">Garantir que as histórias cheguem mais bem detalhadas na próxima Planning.</p>
+                    </button>
+
+                    <button onclick="selectActionPlan('automation')" id="action-plan-automation" class="action-plan-btn p-5 border-2 border-slate-200 rounded-2xl text-left hover:border-indigo-500 transition space-y-2 bg-slate-50">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <h5 class="font-bold text-slate-800 text-sm">Automação de Testes</h5>
+                        <p class="text-xs text-slate-500">Criar scripts automatizados de testes para evitar gargalos ao fim da Sprint.</p>
+                    </button>
+                </div>
+
+                <div id="retrospective-feedback" class="hidden p-4 rounded-xl bg-slate-900 text-white text-sm"></div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                    <button onclick="prevStep()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2.5 rounded-xl transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Voltar
+                    </button>
+                    <button onclick="finishSprint()" id="btn-finish-sprint" disabled class="opacity-50 cursor-not-allowed bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                        <span>Concluir Simulador de Sprint</span>
+                    </button>
+                </div>
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- TAB 2: ATORES E PAPÉIS                    -->
-        <!-- ========================================== -->
+        <!-- ================= TAB 2: PAPÉIS E ATORES ================= -->
         <section id="tab-papeis" class="hidden space-y-6">
-            <div class="text-center max-w-3xl mx-auto mb-8">
-                <h2 class="text-3xl font-bold text-slate-900">Os Atores do Scrum Framework</h2>
-                <p class="text-slate-600 mt-2">
-                    No Scrum, a equipe é multidisciplinar e auto-organizável. Não existem chefes ou hierarquias tradicionais, mas sim responsabilidades claras.
-                </p>
+            <div class="bg-gradient-to-r from-slate-800 to-indigo-900 rounded-2xl p-6 text-white shadow-lg">
+                <h2 class="text-2xl font-bold">Atores & Papéis no Scrum</h2>
+                <p class="text-slate-300 text-sm mt-1">Conheça as responsabilidades de cada elemento que compõe o Time Scrum e a organização.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Product Owner -->
-                <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-purple-500 hover:shadow-lg transition flex flex-col justify-between">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl mb-4">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 relative overflow-hidden">
+                    <div class="w-2 h-full bg-purple-500 absolute left-0 top-0"></div>
+                    <div class="flex items-center gap-3 pl-2">
+                        <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl font-bold">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Negócio & Visão</span>
-                        <h3 class="text-xl font-bold text-slate-900 mt-1">Product Owner (PO)</h3>
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                            É a voz do cliente e dos stakeholders. Responsável por maximizar o valor do produto entregue pelo time.
-                        </p>
-                        
-                        <div class="mt-4 pt-4 border-t border-slate-100">
-                            <h4 class="text-xs font-semibold text-slate-500 uppercase mb-2">Principais Responsabilidades:</h4>
-                            <ul class="text-xs text-slate-600 space-y-1.5">
-                                <li class="flex items-start"><i class="fa-solid fa-check text-purple-500 mr-2 mt-0.5"></i>Gerenciar e priorizar o Product Backlog</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-purple-500 mr-2 mt-0.5"></i>Definir a Meta da Sprint (Sprint Goal)</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-purple-500 mr-2 mt-0.5"></i>Aprovar ou rejeitar os incrementos entregues</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-purple-500 mr-2 mt-0.5"></i>Esclarecer dúvidas sobre histórias de usuário</li>
-                            </ul>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-lg">Product Owner (PO)</h3>
+                            <span class="text-xs bg-purple-100 text-purple-700 font-bold px-2.5 py-0.5 rounded-md">Voz do Cliente & Negócio</span>
                         </div>
                     </div>
-                    <div class="mt-6 bg-purple-50 p-3 rounded-xl border border-purple-100">
-                        <span class="text-xs text-purple-800 font-medium block"><strong>Superpoder:</strong> Dizer "Não" para manter o foco no valor real.</span>
-                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed pl-2">
+                        Responsável por maximizar o valor do produto resultante do trabalho do Time Scrum. É a única pessoa responsável por gerenciar o Product Backlog.
+                    </p>
+                    <ul class="text-xs text-slate-600 space-y-2 pl-2 border-t border-slate-100 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-500"></i> Define e prioriza os itens do Product Backlog</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-500"></i> Garante clareza nos requisitos e aceitação das histórias</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-500"></i> Mantém alinhamento com os Stakeholders</li>
+                    </ul>
                 </div>
 
                 <!-- Scrum Master -->
-                <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-cyan-500 hover:shadow-lg transition flex flex-col justify-between">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-2xl mb-4">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 relative overflow-hidden">
+                    <div class="w-2 h-full bg-cyan-500 absolute left-0 top-0"></div>
+                    <div class="flex items-center gap-3 pl-2">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-xl font-bold">
                             <i class="fa-solid fa-user-shield"></i>
                         </div>
-                        <span class="text-xs font-bold text-cyan-600 uppercase tracking-wider">Facilitador & Líder</span>
-                        <h3 class="text-xl font-bold text-slate-900 mt-1">Scrum Master (SM)</h3>
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                            Garante que o Scrum seja compreendido e praticado. Atua como um líder servidor para o time e para a organização.
-                        </p>
-                        
-                        <div class="mt-4 pt-4 border-t border-slate-100">
-                            <h4 class="text-xs font-semibold text-slate-500 uppercase mb-2">Principais Responsabilidades:</h4>
-                            <ul class="text-xs text-slate-600 space-y-1.5">
-                                <li class="flex items-start"><i class="fa-solid fa-check text-cyan-500 mr-2 mt-0.5"></i>Remover impedimentos no dia a dia do time</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-cyan-500 mr-2 mt-0.5"></i>Facilitar as ceremônias (Planning, Daily, Review, Retro)</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-cyan-500 mr-2 mt-0.5"></i>Proteger o time de distrações externas</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-cyan-500 mr-2 mt-0.5"></i>Promover a melhoria contínua da equipe</li>
-                            </ul>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-lg">Scrum Master (SM)</h3>
+                            <span class="text-xs bg-cyan-100 text-cyan-700 font-bold px-2.5 py-0.5 rounded-md">Líder Servidor & Facilitador</span>
                         </div>
                     </div>
-                    <div class="mt-6 bg-cyan-50 p-3 rounded-xl border border-cyan-100">
-                        <span class="text-xs text-cyan-800 font-medium block"><strong>Superpoder:</strong> Destravar o time e promover a eficiência sem mandar.</span>
-                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed pl-2">
+                        Responsável por estabelecer o Scrum conforme definido no Guia do Scrum. Ajuda o time a entender as teorias e práticas ágeis.
+                    </p>
+                    <ul class="text-xs text-slate-600 space-y-2 pl-2 border-t border-slate-100 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500"></i> Remove impedimentos que travam os desenvolvedores</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500"></i> Facilita eventos da Sprint sem impor ordens</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500"></i> Protege o time contra interrupções externas</li>
+                    </ul>
                 </div>
 
-                <!-- Developers / Time de Desenvolvimento -->
-                <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-emerald-500 hover:shadow-lg transition flex flex-col justify-between">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-4">
-                            <i class="fa-solid fa-code"></i>
+                <!-- Developers -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 relative overflow-hidden">
+                    <div class="w-2 h-full bg-emerald-500 absolute left-0 top-0"></div>
+                    <div class="flex items-center gap-3 pl-2">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-laptop-code"></i>
                         </div>
-                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Construção & Entrega</span>
-                        <h3 class="text-xl font-bold text-slate-900 mt-1">Dev Team (Developers)</h3>
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                            Profissionais multifuncionais que criam qualquer aspecto de um incremento utilizável a cada Sprint.
-                        </p>
-                        
-                        <div class="mt-4 pt-4 border-t border-slate-100">
-                            <h4 class="text-xs font-semibold text-slate-500 uppercase mb-2">Principais Responsabilidades:</h4>
-                            <ul class="text-xs text-slate-600 space-y-1.5">
-                                <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mr-2 mt-0.5"></i>Criar o plano para a Sprint (Sprint Backlog)</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mr-2 mt-0.5"></i>Garantir a qualidade técnica (Definition of Done)</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mr-2 mt-0.5"></i>Auto-organizar quem faz o quê no dia a dia</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mr-2 mt-0.5"></i>Adaptar o plano diariamente no Daily Scrum</li>
-                            </ul>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-lg">Desenvolvedores (Dev Team)</h3>
+                            <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2.5 py-0.5 rounded-md">Execução Multifuncional</span>
                         </div>
                     </div>
-                    <div class="mt-6 bg-emerald-50 p-3 rounded-xl border border-emerald-100">
-                        <span class="text-xs text-emerald-800 font-medium block"><strong>Superpoder:</strong> Transformar ideias em produto funcionando.</span>
-                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed pl-2">
+                        Pessoas do time Scrum que estão comprometidas a criar qualquer aspecto de um incremento usável a cada Sprint.
+                    </p>
+                    <ul class="text-xs text-slate-600 space-y-2 pl-2 border-t border-slate-100 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> Criam o plano para a Sprint (Sprint Backlog)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> Atribuem pontuações e estimativas às tarefas</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> Garantem a qualidade técnica e realização dos testes</li>
+                    </ul>
                 </div>
 
                 <!-- Stakeholders -->
-                <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-amber-500 hover:shadow-lg transition flex flex-col justify-between">
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-4">
-                            <i class="fa-solid fa-handshake"></i>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 relative overflow-hidden">
+                    <div class="w-2 h-full bg-amber-500 absolute left-0 top-0"></div>
+                    <div class="flex items-center gap-3 pl-2">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-briefcase"></i>
                         </div>
-                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Interessados & Clientes</span>
-                        <h3 class="text-xl font-bold text-slate-900 mt-1">Stakeholders</h3>
-                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
-                            Pessoas impactadas pelo produto (clientes, diretores, usuários finais, investidores) fora do Scrum Team direto.
-                        </p>
-                        
-                        <div class="mt-4 pt-4 border-t border-slate-100">
-                            <h4 class="text-xs font-semibold text-slate-500 uppercase mb-2">Principais Responsabilidades:</h4>
-                            <ul class="text-xs text-slate-600 space-y-1.5">
-                                <li class="flex items-start"><i class="fa-solid fa-check text-amber-500 mr-2 mt-0.5"></i>Fornecer feedback sobre o produto na Sprint Review</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-amber-500 mr-2 mt-0.5"></i>Apresentar necessidades reais de negócio ao PO</li>
-                                <li class="flex items-start"><i class="fa-solid fa-check text-amber-500 mr-2 mt-0.5"></i>Acompanhar a evolução das entregas do projeto</li>
-                            </ul>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-lg">Stakeholders (Partes Interessadas)</h3>
+                            <span class="text-xs bg-amber-100 text-amber-700 font-bold px-2.5 py-0.5 rounded-md">Clientes, Diretores & Usuários</span>
                         </div>
                     </div>
-                    <div class="mt-6 bg-amber-50 p-3 rounded-xl border border-amber-100">
-                        <span class="text-xs text-amber-800 font-medium block"><strong>Superpoder:</strong> Trazer a realidade do mercado para dentro do time.</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Composition Card -->
-            <div class="bg-indigo-900 text-white rounded-2xl p-6 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="space-y-2">
-                    <span class="text-indigo-300 font-semibold text-xs uppercase">Conceito Importante</span>
-                    <h3 class="text-xl font-bold">O "Scrum Team" Completo</h3>
-                    <p class="text-indigo-100 text-sm max-w-2xl">
-                        O Scrum Team é composto por <strong>1 Product Owner + 1 Scrum Master + Developers</strong> (geralmente entre 3 e 10 pessoas). O time é pequeno o suficiente para se comunicar rapidamente e grande o suficiente para realizar trabalhos significativos.
+                    <p class="text-slate-600 text-sm leading-relaxed pl-2">
+                        Pessoas fora do Time Scrum que têm interesse no produto, como clientes finais, usuários, diretores e investidores.
                     </p>
-                </div>
-                <div class="bg-indigo-800/80 p-4 rounded-xl border border-indigo-700 text-center min-w-[200px]">
-                    <div class="text-3xl font-extrabold text-indigo-300">3 a 10</div>
-                    <div class="text-xs text-indigo-200 mt-1">Tamanho ideal do Scrum Team</div>
+                    <ul class="text-xs text-slate-600 space-y-2 pl-2 border-t border-slate-100 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500"></i> Participam ativamente da Sprint Review</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500"></i> Fornecem feedbacks para guiar o futuro do produto</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500"></i> Não interferem diretamente na execução diária da Sprint</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- TAB 3: CEREMÔNIAS E ARTEFATOS              -->
-        <!-- ========================================== -->
+        <!-- ================= TAB 3: CEREMÔNIAS E ARTEFATOS ================= -->
         <section id="tab-etapas" class="hidden space-y-8">
-            <div class="text-center max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-slate-900">Eventos & Artefatos do Scrum</h2>
-                <p class="text-slate-600 mt-2">
-                    O Scrum é estruturado em 4 eventos formais (ceremônias) contidos dentro da Sprint, gerando 3 artefatos fundamentais.
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800">Ceremônias (Eventos) do Scrum</h2>
+                <p class="text-slate-500 text-sm">Eventos formais projetados para permitir inspeção e adaptação.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                    <span class="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Início da Sprint</span>
+                    <h3 class="font-bold text-slate-800 text-base">1. Sprint Planning</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Define o que será entregue na Sprint e como o trabalho será realizado.</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                    <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Diário (15 min)</span>
+                    <h3 class="font-bold text-slate-800 text-base">2. Daily Scrum</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Reunião diária para inspecionar o progresso e realinhar o plano do dia.</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                    <span class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Fim da Sprint</span>
+                    <h3 class="font-bold text-slate-800 text-base">3. Sprint Review</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Demonstração do incremento feito aos stakeholders para obter feedback.</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                    <span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Encerramento</span>
+                    <h3 class="font-bold text-slate-800 text-base">4. Retrospectiva</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Análise do processo e pessoas para planejar melhorias na próxima Sprint.</p>
+                </div>
+            </div>
+
+            <div class="pt-4">
+                <h2 class="text-2xl font-bold text-slate-800">Os 3 Artefatos do Scrum</h2>
+                <p class="text-slate-500 text-sm">Representam trabalho ou valor para fornecer transparência.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-list-ul"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-base">Product Backlog</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Lista ordenada e contínua de tudo o que é necessário no produto.</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-[11px] text-slate-500 border border-slate-100">
+                        <strong>Compromisso:</strong> Meta do Produto (Product Goal)
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-tasks"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-base">Sprint Backlog</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Conjunto de itens selecionados para a Sprint mais o plano de entrega.</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-[11px] text-slate-500 border border-slate-100">
+                        <strong>Compromisso:</strong> Meta da Sprint (Sprint Goal)
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-box-check"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-base">Incremento</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Soma de todos os itens do backlog concluídos durante a Sprint e Sprints anteriores.</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-[11px] text-slate-500 border border-slate-100">
+                        <strong>Compromisso:</strong> Definição de Pronto (Definition of Done)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: STORY POINTS EXPLICATIVO ================= -->
+        <section id="tab-storypoints" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-indigo-900 to-purple-900 rounded-2xl p-6 text-white shadow-lg space-y-2">
+                <span class="bg-indigo-500/30 text-indigo-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-indigo-400/30">
+                    Estimativa Relativa
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold">O que são Story Points?</h2>
+                <p class="text-indigo-200 text-sm leading-relaxed max-w-3xl">
+                    Story Points (Pontos de História) são unidades de medida relativa utilizadas em times ágeis para estimar o esforço geral necessário para concluir uma User Story ou tarefa.
                 </p>
             </div>
 
-            <!-- Section 1: Eventos/Ceremônias -->
-            <div>
-                <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <i class="fa-regular fa-clock text-indigo-600"></i> As 4 Ceremônias do Scrum
+            <!-- 3 Pillars -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-indigo-600"></i> Os 3 Pilares do Story Point
                 </h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Event 1: Sprint Planning -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-indigo-300 transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="bg-indigo-100 text-indigo-700 font-bold text-xs px-2.5 py-1 rounded-full">1. Início da Sprint</span>
-                            <span class="text-xs text-slate-400"><i class="fa-regular fa-hourglass-half mr-1"></i>Até 8h (para 1 mês de Sprint)</span>
-                        </div>
-                        <h4 class="text-lg font-bold text-slate-900">Sprint Planning (Planejamento)</h4>
-                        <p class="text-slate-600 text-sm mt-2">
-                            Define o que será feito na Sprint e como o trabalho será realizado. O PO apresenta os itens prioritários, o time estima e decide o compromisso.
-                        </p>
-                        <div class="mt-4 bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700 space-y-1">
-                            <p><strong>Resultado principal:</strong> Meta da Sprint (Sprint Goal) e o Sprint Backlog selecionado.</p>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">1</div>
+                        <h4 class="font-bold text-slate-800 text-sm">Volume de Esforço</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">A quantidade bruta de trabalho manual ou braçal a ser realizado.</p>
                     </div>
 
-                    <!-- Event 2: Daily Scrum -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-indigo-300 transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="bg-emerald-100 text-emerald-700 font-bold text-xs px-2.5 py-1 rounded-full">2. Diário</span>
-                            <span class="text-xs text-slate-400"><i class="fa-regular fa-hourglass-half mr-1"></i>Máximo 15 minutos</span>
-                        </div>
-                        <h4 class="text-lg font-bold text-slate-900">Daily Scrum (Reunião Diária)</h4>
-                        <p class="text-slate-600 text-sm mt-2">
-                            Encontro rápido diário dos Developers para alinhar as atividades, inspecionar o progresso rumo à meta da Sprint e identificar impedimentos.
-                        </p>
-                        <div class="mt-4 bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700 space-y-1">
-                            <p><strong>Perguntas clássicas:</strong> O que fiz ontem? O que farei hoje? Há algum impedimento?</p>
-                        </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">2</div>
+                        <h4 class="font-bold text-slate-800 text-sm">Complexidade Técnica</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">A dificuldade do código, arquitetura ou lógica exigida.</p>
                     </div>
 
-                    <!-- Event 3: Sprint Review -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-indigo-300 transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="bg-amber-100 text-amber-700 font-bold text-xs px-2.5 py-1 rounded-full">3. Fim da Sprint</span>
-                            <span class="text-xs text-slate-400"><i class="fa-regular fa-hourglass-half mr-1"></i>Até 4h</span>
-                        </div>
-                        <h4 class="text-lg font-bold text-slate-900">Sprint Review (Revisão da Sprint)</h4>
-                        <p class="text-slate-600 text-sm mt-2">
-                            O time demonstra o incremento funcional concluído para os Stakeholders. Coleta-se feedback em tempo real para adaptar o Product Backlog.
-                        </p>
-                        <div class="mt-4 bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700 space-y-1">
-                            <p><strong>Foco:</strong> Inspeção do produto entregue e adaptação dos próximos passos.</p>
-                        </div>
-                    </div>
-
-                    <!-- Event 4: Retrospective -->
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-indigo-300 transition">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="bg-purple-100 text-purple-700 font-bold text-xs px-2.5 py-1 rounded-full">4. Encerramento</span>
-                            <span class="text-xs text-slate-400"><i class="fa-regular fa-hourglass-half mr-1"></i>Até 3h</span>
-                        </div>
-                        <h4 class="text-lg font-bold text-slate-900">Sprint Retrospective (Retrospectiva)</h4>
-                        <p class="text-slate-600 text-sm mt-2">
-                            Reunião interna do Scrum Team para inspecionar <em>como</em> foi a Sprint quanto a pessoas, relações, processos e ferramentas.
-                        </p>
-                        <div class="mt-4 bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700 space-y-1">
-                            <p><strong>Objetivo:</strong> Planejar melhorias contínuas de trabalho para a próxima Sprint.</p>
-                        </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">3</div>
+                        <h4 class="font-bold text-slate-800 text-sm">Risco e Incerteza</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">O quanto a tecnologia ou negócio é desconhecido pelo time.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Section 2: Artefatos do Scrum -->
-            <div class="pt-6">
-                <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-cubes text-purple-600"></i> Os 3 Artefatos Principais & Seus Compromissos
-                </h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-gradient-to-b from-slate-900 to-slate-800 text-white p-6 rounded-2xl shadow-md">
-                        <div class="text-purple-400 text-xl font-bold mb-2">1. Product Backlog</div>
-                        <p class="text-slate-300 text-xs leading-relaxed mb-4">
-                            Lista emergente e ordenada de tudo o que é necessário para melhorar o produto. Mantida pelo Product Owner.
-                        </p>
-                        <div class="bg-slate-700/60 p-3 rounded-xl text-xs border border-slate-600">
-                            <span class="text-purple-300 font-semibold block mb-1">Compromisso associado:</span>
-                            <strong class="text-white">Meta do Produto (Product Goal)</strong>
-                        </div>
-                    </div>
-
-                    <div class="bg-gradient-to-b from-slate-900 to-slate-800 text-white p-6 rounded-2xl shadow-md">
-                        <div class="text-indigo-400 text-xl font-bold mb-2">2. Sprint Backlog</div>
-                        <p class="text-slate-300 text-xs leading-relaxed mb-4">
-                            Conjunto de itens selecionados para a Sprint + o plano de como entregá-los. Pertence aos Developers.
-                        </p>
-                        <div class="bg-slate-700/60 p-3 rounded-xl text-xs border border-slate-600">
-                            <span class="text-indigo-300 font-semibold block mb-1">Compromisso associado:</span>
-                            <strong class="text-white">Meta da Sprint (Sprint Goal)</strong>
-                        </div>
-                    </div>
-
-                    <div class="bg-gradient-to-b from-slate-900 to-slate-800 text-white p-6 rounded-2xl shadow-md">
-                        <div class="text-emerald-400 text-xl font-bold mb-2">3. Incremento</div>
-                        <p class="text-slate-300 text-xs leading-relaxed mb-4">
-                            Soma de todos os itens do Product Backlog concluídos durante a Sprint + o valor dos incrementos anteriores.
-                        </p>
-                        <div class="bg-slate-700/60 p-3 rounded-xl text-xs border border-slate-600">
-                            <span class="text-emerald-300 font-semibold block mb-1">Compromisso associado:</span>
-                            <strong class="text-white">Definição de Pronto (Definition of Done)</strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ========================================== -->
-        <!-- TAB: STORY POINTS & ESTIMAÇÃO RELATIVA     -->
-        <!-- ========================================== -->
-        <section id="tab-storypoints" class="hidden space-y-8">
-            <!-- Header Banner -->
-            <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
-                <div class="relative z-10 max-w-3xl">
-                    <span class="bg-indigo-500/30 text-indigo-200 text-xs font-semibold px-3 py-1 rounded-full border border-indigo-400/30 uppercase tracking-wider">
-                        Técnicas de Estimativa Ágil
-                    </span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold mt-3">O que são Story Points?</h2>
-                    <p class="text-indigo-200 text-sm sm:text-base mt-2">
-                        Story Points (Pontos de História) são unidades de medida relativas para calcular o tamanho e complexidade de uma demanda, sem tentar adivinhar a quantidade exata de horas.
-                    </p>
-                </div>
-                <div class="absolute -right-6 -bottom-6 opacity-10 text-9xl">
-                    <i class="fa-solid fa-calculator"></i>
-                </div>
-            </div>
-
-            <!-- 3 Pilares dos Story Points -->
-            <div>
-                <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-layer-group text-indigo-600"></i> Os 3 Pilares da Estimativa
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-indigo-300 transition">
-                        <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-dumbbell"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 text-base">1. Esforço</h4>
-                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                            A quantidade bruta de trabalho físico e mental necessária para construir a solução ou funcionalidade.
-                        </p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-indigo-300 transition">
-                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-brain"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 text-base">2. Complexidade</h4>
-                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                            A dificuldade técnica da implementação, quantidade de integração com outros sistemas ou regras de negócio intricadas.
-                        </p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-indigo-300 transition">
-                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 text-base">3. Incerteza & Risco</h4>
-                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                            O grau de desconhecimento sobre requisitos, bibliotecas de terceiros ou possíveis gargalos desconhecidos.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Horas vs Story Points -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-                <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-scale-balanced text-indigo-600"></i> Por que abandonar as Horas?
-                </h3>
+            <!-- Comparison Table: Hours vs Points -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="text-lg font-bold text-slate-800">Estimativa em Horas vs. Story Points</h3>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs sm:text-sm">
-                        <thead class="bg-slate-100 text-slate-700 font-bold uppercase text-[10px]">
-                            <tr>
-                                <th class="p-3.5 rounded-l-xl">Estimativa em Horas</th>
-                                <th class="p-3.5 rounded-r-xl bg-indigo-50 text-indigo-900">Estimativa em Story Points</th>
+                    <table class="w-full text-left text-xs text-slate-600 border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-800 font-bold uppercase">
+                                <th class="p-3 rounded-l-lg">Característica</th>
+                                <th class="p-3">Horas (Tradicional)</th>
+                                <th class="p-3 rounded-r-lg bg-indigo-50 text-indigo-800">Story Points (Ágil)</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100 text-slate-600">
+                        <tbody class="divide-y divide-slate-100">
                             <tr>
-                                <td class="p-3.5">Absoluta: varia conforme a sênioridade do desenvolvedor.</td>
-                                <td class="p-3.5 font-medium text-indigo-900 bg-indigo-50/30">Relativa: o tamanho da tarefa é o mesmo para todo o time.</td>
+                                <td class="p-3 font-semibold text-slate-700">Tipo de Medida</td>
+                                <td class="p-3">Absoluta (tempo do relógio)</td>
+                                <td class="p-3 font-semibold text-indigo-700 bg-indigo-50/30">Relativa (tamanho comparativo)</td>
                             </tr>
                             <tr>
-                                <td class="p-3.5">Gera uma falsa sensação de precisão temporal exata.</td>
-                                <td class="p-3.5 font-medium text-indigo-900 bg-indigo-50/30">Aceita a incerteza inerente ao desenvolvimento.</td>
+                                <td class="p-3 font-semibold text-slate-700">Dependência de Perfil</td>
+                                <td class="p-3">Varia se quem faz é Júnior ou Sênior</td>
+                                <td class="p-3 font-semibold text-indigo-700 bg-indigo-50/30">Igual para todo o time (o tamanho da tarefa não muda)</td>
                             </tr>
                             <tr>
-                                <td class="p-3.5">Cria cobrança individual por prazos em horas.</td>
-                                <td class="p-3.5 font-medium text-indigo-900 bg-indigo-50/30">Promove a responsabilidade coletiva do time.</td>
+                                <td class="p-3 font-semibold text-slate-700">Sensação de Precisão</td>
+                                <td class="p-3">Falsa precisão (difícil prever horas exatas)</td>
+                                <td class="p-3 font-semibold text-indigo-700 bg-indigo-50/30">Aceita a incerteza de forma realista</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Fibonacci & Significado dos Pontos -->
-            <div>
-                <h3 class="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-line text-purple-600"></i> A Sequência de Fibonacci na Prática
-                </h3>
-                <p class="text-xs text-slate-600 mb-4">
-                    Usamos saltos exponenciais na escala ($1, 2, 3, 5, 8, 13, 21, 40$) para refletir que, quanto maior a tarefa, maior é a incerteza envolvida.
-                </p>
+            <!-- Fibonacci Cards -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="text-lg font-bold text-slate-800">A Escala de Fibonacci no Planning Poker</h3>
+                <p class="text-xs text-slate-500">Usamos números não lineares para forçar a diferenciação clara de complexidade:</p>
 
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-center">
-                        <span class="text-2xl font-black text-emerald-600">1 - 3</span>
-                        <span class="block text-xs font-bold text-emerald-900 mt-1">Pequena / Simples</span>
-                        <p class="text-[11px] text-emerald-700 mt-1 leading-tight">Requisitos claros e baixo risco.</p>
+                    <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-xl text-center space-y-1">
+                        <span class="text-2xl font-black text-indigo-600">1 - 3</span>
+                        <p class="text-xs font-bold text-slate-700">Pequeno / Simples</p>
+                        <p class="text-[11px] text-slate-500">Entendimento claro, baixíssimo risco.</p>
                     </div>
 
-                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl text-center">
-                        <span class="text-2xl font-black text-blue-600">5 - 8</span>
-                        <span class="block text-xs font-bold text-blue-900 mt-1">Média / Moderada</span>
-                        <p class="text-[11px] text-blue-700 mt-1 leading-tight">Esforço razoável e algumas dúvidas.</p>
+                    <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-xl text-center space-y-1">
+                        <span class="text-2xl font-black text-indigo-600">5 - 8</span>
+                        <p class="text-xs font-bold text-slate-700">Médio</p>
+                        <p class="text-[11px] text-slate-500">Exige raciocínio e integrações normais.</p>
                     </div>
 
-                    <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-center">
-                        <span class="text-2xl font-black text-amber-600">13 - 21</span>
-                        <span class="block text-xs font-bold text-amber-900 mt-1">Grande / Complexa</span>
-                        <p class="text-[11px] text-amber-700 mt-1 leading-tight">Recomenda-se faturar em partes menores.</p>
+                    <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-xl text-center space-y-1">
+                        <span class="text-2xl font-black text-indigo-600">13 - 21</span>
+                        <p class="text-xs font-bold text-slate-700">Grande / Complexo</p>
+                        <p class="text-[11px] text-slate-500">Recomenda-se faturar/dividir a história.</p>
                     </div>
 
-                    <div class="bg-red-50 border border-red-200 p-4 rounded-xl text-center">
-                        <span class="text-2xl font-black text-red-600">40+</span>
-                        <span class="block text-xs font-bold text-red-900 mt-1">Épico (Epic)</span>
-                        <p class="text-[11px] text-red-700 mt-1 leading-tight">Muito grande para entrar direto em uma Sprint.</p>
+                    <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-xl text-center space-y-1">
+                        <span class="text-2xl font-black text-indigo-600">40+</span>
+                        <p class="text-xs font-bold text-slate-700">Épico</p>
+                        <p class="text-[11px] text-slate-500">Muito grande para entrar direto em uma Sprint.</p>
                     </div>
-                </div>
-            </div>
-
-            <!-- Velocidade / Velocity -->
-            <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="space-y-2">
-                    <span class="text-indigo-400 font-semibold text-xs uppercase">Conexão com o Planejamento</span>
-                    <h4 class="text-xl font-bold">O que é a Velocidade (Velocity)?</h4>
-                    <p class="text-slate-300 text-xs max-w-2xl leading-relaxed">
-                        É a média de Story Points que uma equipe consegue entregar ao final de cada Sprint. Com essa métrica acumulada, o time sabe exatamente qual é sua capacidade sustentável na próxima reunião de planejamento.
-                    </p>
-                </div>
-                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 text-center min-w-[200px]">
-                    <div class="text-3xl font-extrabold text-indigo-400"><i class="fa-solid fa-gauge-high mr-2"></i>Métrica</div>
-                    <div class="text-xs text-slate-300 mt-1">Pontos Concluídos por Sprint</div>
                 </div>
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- TAB 4: QUIZ INTERATIVO                     -->
-        <!-- ========================================== -->
+        <!-- ================= TAB 5: QUIZ DE CONHECIMENTO ================= -->
         <section id="tab-quiz" class="hidden space-y-6">
-            <div id="quiz-intro-card" class="bg-white rounded-2xl shadow-md border border-slate-200 p-6 sm:p-8 text-center max-w-2xl mx-auto">
-                <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
-                    <i class="fa-solid fa-award"></i>
+            <div class="bg-gradient-to-r from-purple-800 to-indigo-800 rounded-2xl p-6 text-white shadow-lg flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold">Quiz de Fixação Scrum</h2>
+                    <p class="text-purple-200 text-sm mt-1">Teste seus conhecimentos sobre papéis, ceremônias e Story Points.</p>
                 </div>
-                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Teste Seus Conhecimentos em Scrum</h2>
-                <p class="text-slate-600 text-sm mt-2 max-w-lg mx-auto">
-                    Responda a 5 perguntas objetivas para testar seu domínio sobre o papel dos atores, ceremônias e artefatos.
-                </p>
-                
-                <div class="mt-6 flex justify-center gap-4 text-xs font-medium text-slate-500">
-                    <span class="flex items-center gap-1"><i class="fa-solid fa-check-circle text-emerald-500"></i> 5 Perguntas</span>
-                    <span class="flex items-center gap-1"><i class="fa-solid fa-clock text-amber-500"></i> Sem limite de tempo</span>
-                    <span class="flex items-center gap-1"><i class="fa-solid fa-star text-indigo-500"></i> Feedback imediato</span>
-                </div>
-
-                <button onclick="startQuiz()" class="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition transform active:scale-95">
-                    Iniciar Quiz Agora <i class="fa-solid fa-arrow-right ml-2"></i>
-                </button>
-            </div>
-
-            <!-- Quiz Container (Hidden by default) -->
-            <div id="quiz-box" class="hidden bg-white rounded-2xl shadow-md border border-slate-200 p-6 sm:p-8 max-w-3xl mx-auto">
-                <div class="flex justify-between items-center pb-4 mb-6 border-b border-slate-100">
-                    <div>
-                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Desafio Scrum</span>
-                        <h3 id="quiz-question-num" class="text-lg font-bold text-slate-900">Pergunta 1 de 5</h3>
-                    </div>
-                    <div id="quiz-score-badge" class="bg-indigo-50 text-indigo-700 font-semibold text-xs px-3 py-1.5 rounded-full border border-indigo-100">
-                        Pontuação: 0
-                    </div>
-                </div>
-
-                <!-- Question Title -->
-                <p id="quiz-question-text" class="text-base sm:text-lg font-semibold text-slate-800 mb-6 leading-snug">
-                    Carregando pergunta...
-                </p>
-
-                <!-- Question Options -->
-                <div id="quiz-options" class="space-y-3">
-                    <!-- Dynamic Options -->
-                </div>
-
-                <!-- Feedback Area -->
-                <div id="quiz-feedback" class="hidden mt-6 p-4 rounded-xl text-xs sm:text-sm"></div>
-
-                <!-- Action Button -->
-                <div class="mt-6 flex justify-end">
-                    <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl transition">
-                        Próxima Pergunta <i class="fa-solid fa-chevron-right ml-1"></i>
-                    </button>
+                <div class="bg-white/10 px-4 py-2 rounded-xl text-center border border-white/20">
+                    <span class="text-xs text-purple-200 font-medium">Pontuação</span>
+                    <p id="quiz-score-display" class="text-2xl font-black text-white">0 / 5</p>
                 </div>
             </div>
 
-            <!-- Quiz Result View -->
-            <div id="quiz-result" class="hidden bg-white rounded-2xl shadow-md border border-slate-200 p-8 text-center max-w-xl mx-auto space-y-6">
-                <div id="quiz-result-icon" class="w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto"></div>
-                <div>
-                    <h3 class="text-2xl font-bold text-slate-900" id="quiz-result-title">Resultado</h3>
-                    <p class="text-slate-600 mt-2 text-sm" id="quiz-result-desc">Descrição do seu desempenho</p>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 inline-block px-8">
-                    <span class="text-xs text-slate-500 block uppercase font-bold">Sua Nota Final</span>
-                    <span class="text-4xl font-extrabold text-indigo-600" id="quiz-final-score">0 / 5</span>
-                </div>
-                <div>
-                    <button onclick="startQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition">
-                        Refazer Quiz <i class="fa-solid fa-rotate-right ml-2"></i>
-                    </button>
-                </div>
+            <div id="quiz-card-container" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <!-- Quiz dynamically injected by JS -->
             </div>
         </section>
+
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-white border-t border-slate-200 mt-auto py-4 text-center text-xs text-slate-500">
-        <p>Simulador Educacional Scrum Framework • Desenvolvido para Aprendizado Interativo</p>
-    </footer>
-
+    <!-- JAVASCRIPT APP CORE LOGIC -->
     <script>
-        /* ===================================================================
-         * GLOBAL STATE & TAB NAVIGATION
-         * =================================================================== */
-        let currentSimStep = 1;
+        /* Global State Variables */
+        let currentTab = 'simulador';
+        let currentStep = 1;
 
-        // Navigation Switcher
-        function switchTab(tabId) {
-            document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        // Data for Backlog Stories
+        const backlogStories = [
+            { id: 1, title: 'Tela de Login com OAuth Google', points: 3, role: 'Segurança', desc: 'Permitir autenticação social simples para o usuário.', selected: false, status: 'todo' },
+            { id: 2, title: 'Carrinho de Compras e Checkout', points: 5, role: 'E-commerce', desc: 'Fluxo completo de pagamento com cartão de crédito.', selected: false, status: 'todo' },
+            { id: 3, title: 'Filtro Avançado de Produtos', points: 3, role: 'Busca', desc: 'Filtragem por faixa de preço, categoria e avaliação.', selected: false, status: 'todo' },
+            { id: 4, title: 'Notificações Push no Celular', points: 2, role: 'Engajamento', desc: 'Avisar usuários sobre promoções relâmpago.', selected: false, status: 'todo' },
+            { id: 5, title: 'Relatório em PDF de Vendas', points: 8, role: 'Analytics', desc: 'Gerar gráficos complexos e exportar para PDF.', selected: false, status: 'todo' }
+        ];
 
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-            const activeBtn = document.getElementById(`nav-${tabId}`);
-            if(activeBtn) activeBtn.classList.add('active');
+        let sprintMaxCapacity = 13;
+        let selectedStories = [];
+        let currentDay = 1;
+        let sprintActive = false;
+        let hasImpediment = false;
+        let selectedActionPlan = null;
 
-            if(tabId === 'simulador' && currentSimStep === 1) {
-                renderSimStep(1);
-            }
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        /* ===================================================================
-         * SIMULATOR LOGIC
-         * =================================================================== */
-
-        // State variables for simulator
-        let simState = {
-            productBacklog: [
-                { id: 1, title: 'Tela de Login com Google', points: 3, priority: 'Alta', status: 'backlog', role: 'PO' },
-                { id: 2, title: 'Carrinho de Compras Interativo', points: 8, priority: 'Alta', status: 'backlog', role: 'PO' },
-                { id: 3, title: 'Exportar Relatório em PDF', points: 5, priority: 'Média', status: 'backlog', role: 'PO' },
-                { id: 4, title: 'Filtro por Categoria na Busca', points: 3, priority: 'Média', status: 'backlog', role: 'PO' },
-                { id: 5, title: 'Refatoração da API de Pagamentos', points: 5, priority: 'Baixa', status: 'backlog', role: 'Dev' },
-            ],
-            sprintBacklog: [],
-            capacity: 15,
-            selectedPoints: 0,
-            executionDay: 1,
-            completedTasks: [],
-            impedimentSolved: false,
-            feedbackScore: 0,
-            retroActions: []
-        };
-
-        function loadSimStep(step) {
-            currentSimStep = step;
-            updateStepIndicators(step);
-            renderSimStep(step);
-        }
-
-        function updateStepIndicators(step) {
-            const labelMap = {
-                1: "Passo 1 de 5: Product Backlog & Refinamento",
-                2: "Passo 2 de 5: Sprint Planning (Planejamento)",
-                3: "Passo 3 de 5: Sprint Execution & Daily Scrum",
-                4: "Passo 4 de 5: Sprint Review (Revisão com Stakeholders)",
-                5: "Passo 5 de 5: Sprint Retrospective (Melhoria Contínua)"
-            };
-
-            document.getElementById('step-label').innerText = labelMap[step];
-            document.getElementById('step-percent').innerText = `${step * 20}% Concluído`;
-            document.getElementById('sim-progress-bar').style.width = `${step * 20}%`;
-
-            for(let i=1; i<=5; i++) {
-                const btn = document.getElementById(`sim-step-btn-${i}`);
-                if(i === step) {
-                    btn.className = "p-2 rounded-lg bg-indigo-50 text-indigo-700 font-bold text-xs flex flex-col items-center gap-1 border border-indigo-200 shadow-sm";
-                    btn.children[0].className = "w-5 h-5 rounded-full bg-indigo-600 text-white text-xs flex items-center justify-center font-bold";
-                } else if(i < step) {
-                    btn.className = "p-2 rounded-lg bg-emerald-50 text-emerald-700 font-semibold text-xs flex flex-col items-center gap-1 border border-emerald-200";
-                    btn.children[0].className = "w-5 h-5 rounded-full bg-emerald-500 text-white text-xs flex items-center justify-center";
-                } else {
-                    btn.className = "p-2 rounded-lg bg-slate-50 text-slate-500 text-xs flex flex-col items-center gap-1 border border-slate-200 hover:bg-slate-100";
-                    btn.children[0].className = "w-5 h-5 rounded-full bg-slate-300 text-slate-700 text-xs flex items-center justify-center";
-                }
-            }
-        }
-
-        function renderSimStep(step) {
-            const container = document.getElementById('sim-content');
-
-            if(step === 1) {
-                // STEP 1: Product Backlog & PO
-                container.innerHTML = `
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4 p-4 bg-purple-50 rounded-xl border border-purple-200">
-                            <div class="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-solid fa-user-tie"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-purple-900 text-base">Atuação do Product Owner (PO)</h4>
-                                <p class="text-xs text-purple-800 mt-1">
-                                    "Bem-vindo! Eu sou o Product Owner. Minha missão é priorizar as necessidades dos usuários e do negócio no <strong>Product Backlog</strong>. Veja os itens que preparei para nosso novo e-commerce."
-                                </p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 class="font-bold text-slate-800 text-sm mb-3">Product Backlog Atual (Ordenado por Prioridade):</h4>
-                            <div class="space-y-2">
-                                ${simState.productBacklog.map((item, idx) => `
-                                    <div class="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-200 rounded-xl hover:border-slate-300 transition">
-                                        <div class="flex items-center gap-3">
-                                            <span class="w-6 h-6 bg-slate-200 text-slate-700 font-bold rounded-full text-xs flex items-center justify-center">${idx + 1}</span>
-                                            <div>
-                                                <span class="font-semibold text-sm text-slate-800">${item.title}</span>
-                                                <div class="flex gap-2 mt-1">
-                                                    <span class="text-[10px] bg-purple-100 text-purple-700 font-bold px-2 py-0.5 rounded">Prioridade: ${item.priority}</span>
-                                                    <span class="text-[10px] bg-slate-200 text-slate-700 font-bold px-2 py-0.5 rounded">${item.points} Story Points</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-semibold text-slate-400">Padrão INVEST <i class="fa-solid fa-check text-emerald-500"></i></span>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                            <h5 class="text-xs font-bold text-slate-700 uppercase mb-1">O que aprendemos nesta etapa?</h5>
-                            <p class="text-xs text-slate-600">O Product Backlog nunca está 'pronto'; ele é vivo, priorizado pelo PO e refinado com o time continuamente.</p>
-                        </div>
-
-                        <div class="flex justify-end">
-                            <button onclick="loadSimStep(2)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition flex items-center gap-2">
-                                Ir para Sprint Planning <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            } 
-            else if(step === 2) {
-                // STEP 2: Sprint Planning
-                const totalSelected = simState.sprintBacklog.reduce((acc, i) => acc + i.points, 0);
-                
-                container.innerHTML = `
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4 p-4 bg-emerald-50 rounded-xl border border-emerald-200">
-                            <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-solid fa-users text-lg"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-emerald-900 text-base">Sprint Planning - Definindo a Meta e o Escopo</h4>
-                                <p class="text-xs text-emerald-800 mt-1">
-                                    O Scrum Team se reúne. A capacidade estimada do time para esta Sprint de 2 semanas é de <strong>${simState.capacity} Story Points</strong>. Selecione as tarefas do Product Backlog para compor o <strong>Sprint Backlog</strong> sem ultrapassar o limite.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Capacity Bar -->
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
-                            <div class="flex justify-between text-xs font-bold">
-                                <span>Capacidade Comprometida: ${totalSelected} / ${simState.capacity} Pontos</span>
-                                <span class="${totalSelected > simState.capacity ? 'text-red-500' : 'text-emerald-600'}">
-                                    ${totalSelected > simState.capacity ? 'Capacidade Excedida!' : 'Dentro do Limite'}
-                                </span>
-                            </div>
-                            <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden">
-                                <div class="h-3 ${totalSelected > simState.capacity ? 'bg-red-500' : 'bg-emerald-500'} transition-all duration-300" style="width: ${Math.min((totalSelected / simState.capacity)*100, 100)}%"></div>
-                            </div>
-                        </div>
-
-                        <!-- Interactive Selector -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h5 class="font-bold text-xs text-slate-700 uppercase mb-2">Disponíveis no Product Backlog</h5>
-                                <div class="space-y-2">
-                                    ${simState.productBacklog.filter(i => !simState.sprintBacklog.find(s => s.id === i.id)).map(item => `
-                                        <div class="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between">
-                                            <div>
-                                                <div class="text-xs font-bold text-slate-800">${item.title}</div>
-                                                <div class="text-[10px] text-slate-500 font-semibold mt-0.5">${item.points} Pontos</div>
-                                            </div>
-                                            <button onclick="addToSprint(${item.id})" class="px-2.5 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-200">
-                                                + Adicionar
-                                            </button>
-                                        </div>
-                                    `).join('')}
-                                    ${simState.productBacklog.filter(i => !simState.sprintBacklog.find(s => s.id === i.id)).length === 0 ? '<p class="text-xs text-slate-400 italic">Todos os itens foram selecionados.</p>' : ''}
-                                </div>
-                            </div>
-
-                            <div>
-                                <h5 class="font-bold text-xs text-slate-700 uppercase mb-2">Sprint Backlog Selecionado</h5>
-                                <div class="space-y-2">
-                                    ${simState.sprintBacklog.map(item => `
-                                        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-between">
-                                            <div>
-                                                <div class="text-xs font-bold text-emerald-900">${item.title}</div>
-                                                <div class="text-[10px] text-emerald-700 font-semibold mt-0.5">${item.points} Pontos</div>
-                                            </div>
-                                            <button onclick="removeFromSprint(${item.id})" class="px-2.5 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-xs font-bold border border-red-200">
-                                                Remover
-                                            </button>
-                                        </div>
-                                    `).join('')}
-                                    ${simState.sprintBacklog.length === 0 ? '<p class="text-xs text-slate-400 italic">Nenhum item adicionado ainda.</p>' : ''}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center pt-4 border-t border-slate-100">
-                            <button onclick="loadSimStep(1)" class="text-xs font-bold text-slate-500 hover:text-slate-800">
-                                <i class="fa-solid fa-arrow-left mr-1"></i> Voltar
-                            </button>
-                            <button onclick="startExecution()" ${simState.sprintBacklog.length === 0 || totalSelected > simState.capacity ? 'disabled class="opacity-50 bg-indigo-600 text-white font-bold py-2.5 px-6 rounded-xl text-sm cursor-not-allowed"' : 'class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition flex items-center gap-2"'}>
-                                Iniciar Execução da Sprint <i class="fa-solid fa-play ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-            else if(step === 3) {
-                // STEP 3: Execution & Daily Scrum
-                container.innerHTML = `
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4 p-4 bg-cyan-50 rounded-xl border border-cyan-200">
-                            <div class="w-12 h-12 rounded-full bg-cyan-600 text-white flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-solid fa-user-shield"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-cyan-900 text-base">Execução & Apoio do Scrum Master</h4>
-                                <p class="text-xs text-cyan-800 mt-1">
-                                    A Sprint está correndo! A cada dia realizamos o <strong>Daily Scrum (15 min)</strong>. Avance os dias e ajude o Scrum Master a resolver impedimentos que surgirem no caminho.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Sprint Execution Day Tracker -->
-                        <div class="bg-slate-900 text-white p-5 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <div>
-                                <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Progresso do Tempo</span>
-                                <div class="text-2xl font-black text-indigo-400">Dia ${simState.executionDay} de 10</div>
-                            </div>
-                            
-                            <!-- Daily simulation controls -->
-                            <div class="flex items-center gap-3">
-                                ${simState.executionDay < 10 ? `
-                                    <button onclick="advanceDay()" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-xs py-2.5 px-5 rounded-xl transition flex items-center gap-2">
-                                        <i class="fa-solid fa-forward"></i> Simular Próximo Dia
-                                    </button>
-                                ` : `
-                                    <span class="bg-emerald-500/20 text-emerald-300 font-bold text-xs px-3 py-1.5 rounded-lg border border-emerald-500/30">
-                                        <i class="fa-solid fa-check mr-1"></i> Sprint Concluída!
-                                    </span>
-                                `}
-                            </div>
-                        </div>
-
-                        <!-- Impediment Event Banner (Triggers on Day 4) -->
-                        ${simState.executionDay >= 4 && !simState.impedimentSolved ? `
-                            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl space-y-3">
-                                <div class="flex items-center gap-2 text-amber-800 font-bold text-sm">
-                                    <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Impedimento Detectado no Daily Scrum!
-                                </div>
-                                <p class="text-xs text-amber-700">
-                                    Um desenvolvedor relatou que o servidor de testes caiu e travou o desenvolvimento do carrinho de compras.
-                                </p>
-                                <button onclick="solveImpediment()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-2 px-4 rounded-lg transition">
-                                    <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Scrum Master: Resolver Impedimento
-                                </button>
-                            </div>
-                        ` : ''}
-
-                        ${simState.impedimentSolved ? `
-                            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-xs text-emerald-800 flex items-center gap-2">
-                                <i class="fa-solid fa-circle-check text-emerald-600 text-base"></i>
-                                <span>Impedimento resolvido com sucesso pelo Scrum Master! O time voltou ao fluxo normal.</span>
-                            </div>
-                        ` : ''}
-
-                        <!-- Virtual Kanban Board -->
-                        <div>
-                            <h5 class="text-xs font-bold text-slate-700 uppercase mb-3">Quadro Kanban da Sprint</h5>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <div class="bg-slate-100 p-3 rounded-xl border border-slate-200">
-                                    <div class="text-xs font-bold text-slate-600 mb-2">A Fazer (To Do)</div>
-                                    <div class="space-y-2">
-                                        ${simState.sprintBacklog.filter(t => !simState.completedTasks.includes(t.id) && (simState.executionDay < 5 || t.id !== simState.sprintBacklog[0]?.id)).map(t => `
-                                            <div class="bg-white p-2.5 rounded-lg shadow-sm border border-slate-200 text-xs font-medium text-slate-800">
-                                                ${t.title}
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                </div>
-
-                                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
-                                    <div class="text-xs font-bold text-amber-700 mb-2">Em Andamento (In Progress)</div>
-                                    <div class="space-y-2">
-                                        ${simState.executionDay < 10 ? `
-                                            <div class="bg-white p-2.5 rounded-lg shadow-sm border border-amber-300 text-xs font-medium text-slate-800 flex items-center justify-between">
-                                                <span>Desenvolvendo incrementos...</span>
-                                                <i class="fa-solid fa-spinner animate-spin text-amber-500"></i>
-                                            </div>
-                                        ` : '<p class="text-xs text-slate-400 italic">Nada em andamento.</p>'}
-                                    </div>
-                                </div>
-
-                                <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
-                                    <div class="text-xs font-bold text-emerald-700 mb-2">Pronto (Done)</div>
-                                    <div class="space-y-2">
-                                        ${simState.completedTasks.map(id => {
-                                            const item = simState.sprintBacklog.find(x => x.id === id);
-                                            return item ? `
-                                                <div class="bg-white p-2.5 rounded-lg shadow-sm border border-emerald-300 text-xs font-medium text-emerald-900 flex items-center justify-between">
-                                                    <span>${item.title}</span>
-                                                    <i class="fa-solid fa-check-circle text-emerald-500"></i>
-                                                </div>
-                                            ` : '';
-                                        }).join('')}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center pt-4 border-t border-slate-100">
-                            <button onclick="loadSimStep(2)" class="text-xs font-bold text-slate-500 hover:text-slate-800">
-                                <i class="fa-solid fa-arrow-left mr-1"></i> Voltar
-                            </button>
-                            <button onclick="loadSimStep(4)" ${simState.executionDay < 10 ? 'disabled class="opacity-50 bg-indigo-600 text-white font-bold py-2.5 px-6 rounded-xl text-sm cursor-not-allowed"' : 'class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition flex items-center gap-2"'}>
-                                Ir para Sprint Review <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-            else if(step === 4) {
-                // STEP 4: Sprint Review
-                const totalDonePoints = simState.completedTasks.reduce((acc, id) => {
-                    const item = simState.sprintBacklog.find(x => x.id === id);
-                    return acc + (item ? item.points : 0);
-                }, 0);
-
-                container.innerHTML = `
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4 p-4 bg-amber-50 rounded-xl border border-amber-200">
-                            <div class="w-12 h-12 rounded-full bg-amber-600 text-white flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-solid fa-handshake"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-amber-900 text-base">Sprint Review - Apresentação ao Stakeholder</h4>
-                                <p class="text-xs text-amber-800 mt-1">
-                                    É hora de demonstrar o <strong>Incremento de Produto</strong> pronto aos Stakeholders! Veja o feedback gerado com base no trabalho concluído.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Results Summary -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center">
-                                <span class="text-xs text-slate-500 font-semibold uppercase">Pontos Entregues</span>
-                                <div class="text-3xl font-black text-indigo-600 mt-1">${totalDonePoints} / ${simState.sprintBacklog.reduce((a,b)=>a+b.points,0)}</div>
-                            </div>
-                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center">
-                                <span class="text-xs text-slate-500 font-semibold uppercase">Aprovação dos Stakeholders</span>
-                                <div class="text-3xl font-black text-emerald-600 mt-1">
-                                    ${totalDonePoints > 8 ? '95% (Excelente)' : '70% (Parcial)'}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-3">
-                            <h5 class="text-xs font-bold text-slate-700 uppercase">Itens Demonstrados e Aceitos:</h5>
-                            <div class="space-y-2">
-                                ${simState.completedTasks.map(id => {
-                                    const item = simState.sprintBacklog.find(x => x.id === id);
-                                    return item ? `
-                                        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs font-medium text-emerald-900 flex justify-between items-center">
-                                            <span><i class="fa-solid fa-cube text-emerald-600 mr-2"></i> ${item.title}</span>
-                                            <span class="bg-emerald-200 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">PRONTO (DoD)</span>
-                                        </div>
-                                    ` : '';
-                                }).join('')}
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center pt-4 border-t border-slate-100">
-                            <button onclick="loadSimStep(3)" class="text-xs font-bold text-slate-500 hover:text-slate-800">
-                                <i class="fa-solid fa-arrow-left mr-1"></i> Voltar
-                            </button>
-                            <button onclick="loadSimStep(5)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition flex items-center gap-2">
-                                Ir para Sprint Retrospective <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-            else if(step === 5) {
-                // STEP 5: Sprint Retrospective
-                container.innerHTML = `
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4 p-4 bg-purple-50 rounded-xl border border-purple-200">
-                            <div class="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-solid fa-comments"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-purple-900 text-base">Sprint Retrospective - Melhora Contínua</h4>
-                                <p class="text-xs text-purple-800 mt-1">
-                                    O Scrum Team avalia o próprio processo. Escolha uma ação de melhoria prioritária para aplicar na próxima Sprint!
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="space-y-3">
-                            <h5 class="text-xs font-bold text-slate-700 uppercase">Selecione o plano de ação para a próxima Sprint:</h5>
-                            
-                            <div onclick="selectRetro(1)" id="retro-opt-1" class="p-4 bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 rounded-xl cursor-pointer transition flex items-center justify-between">
-                                <div class="text-xs text-slate-800">
-                                    <strong>Melhorar a comunicação no Daily Scrum:</strong> Limitar falas a 2 minutos por dev.
-                                </div>
-                                <i class="fa-regular fa-circle text-slate-400 text-lg"></i>
-                            </div>
-
-                            <div onclick="selectRetro(2)" id="retro-opt-2" class="p-4 bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 rounded-xl cursor-pointer transition flex items-center justify-between">
-                                <div class="text-xs text-slate-800">
-                                    <strong>Automação de Testes:</strong> Criar testes automatizados para evitar servidor travado.
-                                </div>
-                                <i class="fa-regular fa-circle text-slate-400 text-lg"></i>
-                            </div>
-                        </div>
-
-                        <div id="retro-success-msg" class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800">
-                            <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Excelente escolha! O time assumiu este compromisso de melhoria para o próximo ciclo.
-                        </div>
-
-                        <div class="p-6 bg-gradient-to-r from-indigo-900 to-purple-900 text-white rounded-2xl text-center space-y-3">
-                            <h4 class="text-xl font-bold">Parabéns! Você completou uma Sprint Inteira!</h4>
-                            <p class="text-xs text-indigo-200 max-w-md mx-auto">
-                                Você vivenciou o papel do PO no Backlog, a estimativa no Planning, a agilidade no Daily, a entrega no Review e a evolução na Retrospectiva.
-                            </p>
-                            <button onclick="switchTab('quiz')" class="mt-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-6 rounded-xl text-xs transition">
-                                Testar Conhecimento no Quiz <i class="fa-solid fa-graduation-cap ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        // Helper functions for simulation interactions
-        function addToSprint(id) {
-            const item = simState.productBacklog.find(i => i.id === id);
-            if(item && !simState.sprintBacklog.find(s => s.id === id)) {
-                simState.sprintBacklog.push(item);
-                renderSimStep(2);
-            }
-        }
-
-        function removeFromSprint(id) {
-            simState.sprintBacklog = simState.sprintBacklog.filter(s => s.id !== id);
-            renderSimStep(2);
-        }
-
-        function startExecution() {
-            simState.executionDay = 1;
-            simState.completedTasks = [];
-            simState.impedimentSolved = false;
-            loadSimStep(3);
-        }
-
-        function advanceDay() {
-            if(simState.executionDay < 10) {
-                simState.executionDay += 1;
-
-                // Simulate progress
-                if(simState.executionDay >= 3 && simState.sprintBacklog[0]) {
-                    if(!simState.completedTasks.includes(simState.sprintBacklog[0].id)) {
-                        simState.completedTasks.push(simState.sprintBacklog[0].id);
-                    }
-                }
-                if(simState.executionDay >= 7 && simState.sprintBacklog[1]) {
-                    if(!simState.completedTasks.includes(simState.sprintBacklog[1].id)) {
-                        simState.completedTasks.push(simState.sprintBacklog[1].id);
-                    }
-                }
-                if(simState.executionDay === 10) {
-                    simState.sprintBacklog.forEach(t => {
-                        if(!simState.completedTasks.includes(t.id)) simState.completedTasks.push(t.id);
-                    });
-                }
-
-                renderSimStep(3);
-            }
-        }
-
-        function solveImpediment() {
-            simState.impedimentSolved = true;
-            renderSimStep(3);
-        }
-
-        function selectRetro(optId) {
-            document.querySelectorAll('[id^="retro-opt-"]').forEach(el => {
-                el.classList.remove('border-indigo-500', 'bg-indigo-50');
-                el.querySelector('i').className = "fa-regular fa-circle text-slate-400 text-lg";
-            });
-
-            const sel = document.getElementById(`retro-opt-${optId}`);
-            sel.classList.add('border-indigo-500', 'bg-indigo-50');
-            sel.querySelector('i').className = "fa-solid fa-circle-check text-indigo-600 text-lg";
-
-            document.getElementById('retro-success-msg').classList.remove('hidden');
-        }
-
-        /* ===================================================================
-         * QUIZ LOGIC
-         * =================================================================== */
+        // Quiz Data
         const quizQuestions = [
             {
-                question: "Quem é o único responsável por gerenciar e priorizar o Product Backlog no Scrum?",
-                options: [
-                    "Scrum Master",
-                    "Product Owner (PO)",
-                    "Time de Desenvolvimento",
-                    "Gerente de Projetos"
-                ],
+                question: "Quem é o responsável único por priorizar os itens do Product Backlog?",
+                options: ["Scrum Master", "Product Owner (PO)", "Time de Desenvolvedores", "Stakeholders"],
                 correct: 1,
-                explanation: "O Product Owner é a autoridade única sobre o Product Backlog e responsável por maximizar o valor do produto."
+                explanation: "O Product Owner (PO) é a única pessoa com autoridade e responsabilidade para definir a prioridade do Product Backlog."
             },
             {
-                question: "Qual é a duração máxima recomendada para a reunião diária (Daily Scrum)?",
-                options: [
-                    "30 minutos",
-                    "1 hora",
-                    "15 minutos",
-                    "O tempo que for necessário"
-                ],
+                question: "Qual é a duração recomendada para a reunião Daily Scrum?",
+                options: ["1 hora", "30 minutos", "No máximo 15 minutos", "Não tem tempo limite"],
                 correct: 2,
-                explanation: "A Daily Scrum é um evento de tempo determinado (timebox) de no máximo 15 minutos para manter o foco e agilidade."
+                explanation: "A Daily Scrum é um evento de no máximo 15 minutos para sincronizar o time e inspecionar o progresso do dia."
             },
             {
-                question: "O que é produzido ao final de cada Sprint no Scrum?",
-                options: [
-                    "Apenas um relatório de progresso",
-                    "Um incremento de produto utilizável e 'Pronto' (Done)",
-                    "O plano completo do projeto",
-                    "Uma lista de tarefas pendentes"
-                ],
-                correct: 1,
-                explanation: "Ao final da Sprint, o time deve entregar um Incremento funcional que atenda à Definição de Pronto (Definition of Done)."
+                question: "O que é medido ao utilizar Story Points em uma tarefa?",
+                options: ["Apenas as horas trabalhadas pelo dev", "Apenas a quantidade de código escrito", "Esforço, complexidade e risco/incerteza relativa", "O custo financeiro da funcionalidade"],
+                correct: 2,
+                explanation: "Story Points avaliam uma combinação de esforço bruto, complexidade técnica e riscos envolvidos na implementação."
             },
             {
-                question: "Qual é o principal papel do Scrum Master durante o ciclo de trabalho?",
-                options: [
-                    "Distribuir tarefas para os desenvolvedores",
-                    "Atuar como um líder servidor, facilitando o processo e removendo impedimentos",
-                    "Aprovar as regras de negócio com os clientes",
-                    "Definir a meta da Sprint sozinho"
-                ],
-                correct: 1,
-                explanation: "O Scrum Master não é um chefe de equipe. Ele facilita os processos e ajuda a remover quaisquer bloqueios que impeçam o time de avançar."
-            },
-            {
-                question: "Em qual cerimônia o Scrum Team inspeciona o seu PRÓPRIO PROCESSO e busca formas de melhoria contínua?",
-                options: [
-                    "Sprint Planning",
-                    "Sprint Review",
-                    "Daily Scrum",
-                    "Sprint Retrospective"
-                ],
+                question: "Qual evento do Scrum tem como foco a melhoria contínua dos processos do time?",
+                options: ["Sprint Planning", "Sprint Review", "Daily Scrum", "Sprint Retrospective"],
                 correct: 3,
-                explanation: "A Retrospectiva da Sprint foca em pessoas, relacionamentos, processos e ferramentas para implementar melhorias na próxima Sprint."
+                explanation: "A Retrospectiva da Sprint foca na inspecção e adaptação das pessoas, relacionamentos, processos e ferramentas."
+            },
+            {
+                question: "O que é apresentado obrigatoriamente na Sprint Review?",
+                options: ["O código-fonte em slides de PowerPoint", "Um Incremento de produto pronto e funcional", "O cronograma das próximas 10 Sprints", "As métricas de horas individuais de cada dev"],
+                correct: 1,
+                explanation: "Na Sprint Review é demonstrado o incremento do produto funcional que atenda à Definição de Pronto (DoD)."
             }
         ];
 
-        let quizIndex = 0;
+        let currentQuizIndex = 0;
         let quizScore = 0;
-        let selectedOption = null;
+        let answeredQuestions = {};
 
-        function startQuiz() {
-            quizIndex = 0;
-            quizScore = 0;
-            document.getElementById('quiz-intro-card').classList.add('hidden');
-            document.getElementById('quiz-result').classList.add('hidden');
-            document.getElementById('quiz-box').classList.remove('hidden');
-            renderQuestion();
-        }
+        // Attach switchTab to global window object explicitly to eliminate ReferenceError
+        window.switchTab = function(tabId) {
+            currentTab = tabId;
+            const tabs = ['simulador', 'papeis', 'etapas', 'storypoints', 'quiz'];
 
-        function renderQuestion() {
-            const q = quizQuestions[quizIndex];
-            selectedOption = null;
-
-            document.getElementById('quiz-question-num').innerText = `Pergunta ${quizIndex + 1} de ${quizQuestions.length}`;
-            document.getElementById('quiz-score-badge').innerText = `Pontuação: ${quizScore}`;
-            document.getElementById('quiz-question-text').innerText = q.question;
-
-            const optsContainer = document.getElementById('quiz-options');
-            optsContainer.innerHTML = '';
-
-            q.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-slate-50 transition text-xs sm:text-sm font-medium text-slate-700 flex items-center justify-between";
-                btn.innerHTML = `
-                    <span>${opt}</span>
-                    <i class="fa-regular fa-circle text-slate-300"></i>
-                `;
-                btn.onclick = () => selectOption(idx, btn);
-                optsContainer.appendChild(btn);
+            tabs.forEach(t => {
+                const el = document.getElementById(`tab-${t}`);
+                const navBtn = document.getElementById(`nav-${t}`);
+                if (el) {
+                    if (t === tabId) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+                if (navBtn) {
+                    if (t === tabId) {
+                        navBtn.classList.add('active');
+                    } else {
+                        navBtn.classList.remove('active');
+                    }
+                }
             });
 
-            document.getElementById('quiz-feedback').className = "hidden mt-6 p-4 rounded-xl text-xs sm:text-sm";
-            document.getElementById('quiz-next-btn').classList.add('hidden');
-        }
+            // Close mobile menu when tab selected
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu && window.innerWidth < 768) {
+                mobileMenu.classList.add('hidden');
+            }
+        };
 
-        function selectOption(index, btnEl) {
-            if(selectedOption !== null) return; // Prevent changing after answer
-            selectedOption = index;
+        window.toggleMobileMenu = function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.toggle('hidden');
+            }
+        };
 
-            const q = quizQuestions[quizIndex];
-            const isCorrect = index === q.correct;
+        window.goToStep = function(stepNum) {
+            currentStep = stepNum;
+            updateStepView();
+        };
 
-            if(isCorrect) quizScore += 1;
+        window.nextStep = function() {
+            if (currentStep < 5) {
+                currentStep++;
+                updateStepView();
+            }
+        };
 
-            const allBtns = document.getElementById('quiz-options').children;
-            for(let i = 0; i < allBtns.length; i++) {
-                if(i === q.correct) {
-                    allBtns[i].className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-xs sm:text-sm flex items-center justify-between";
-                    allBtns[i].querySelector('i').className = "fa-solid fa-circle-check text-emerald-600 text-lg";
-                } else if(i === index && !isCorrect) {
-                    allBtns[i].className = "w-full text-left p-4 rounded-xl border-2 border-red-400 bg-red-50 text-red-900 font-medium text-xs sm:text-sm flex items-center justify-between";
-                    allBtns[i].querySelector('i').className = "fa-solid fa-circle-xmark text-red-500 text-lg";
-                } else {
-                    allBtns[i].className = "w-full text-left p-4 rounded-xl border border-slate-200 opacity-50 text-xs sm:text-sm flex items-center justify-between";
+        window.prevStep = function() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepView();
+            }
+        };
+
+        function updateStepView() {
+            for (let i = 1; i <= 5; i++) {
+                const content = document.getElementById(`step-content-${i}`);
+                const navBtn = document.getElementById(`step-nav-${i}`);
+                const navNum = document.getElementById(`step-num-${i}`);
+
+                if (content) {
+                    if (i === currentStep) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                }
+
+                if (navBtn && navNum) {
+                    if (i === currentStep) {
+                        navBtn.className = "step-nav-btn flex items-center gap-2 text-indigo-600 font-bold";
+                        navNum.className = "w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow";
+                    } else if (i < currentStep) {
+                        navBtn.className = "step-nav-btn flex items-center gap-2 text-emerald-600 font-semibold";
+                        navNum.className = "w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm";
+                    } else {
+                        navBtn.className = "step-nav-btn flex items-center gap-2 text-slate-400 font-medium";
+                        navNum.className = "w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm";
+                    }
                 }
             }
-
-            // Show feedback
-            const feedbackBox = document.getElementById('quiz-feedback');
-            feedbackBox.classList.remove('hidden');
-            if(isCorrect) {
-                feedbackBox.className = "mt-6 p-4 rounded-xl bg-emerald-100 text-emerald-800 text-xs sm:text-sm border border-emerald-200";
-                feedbackBox.innerHTML = `<strong>Resposta Correta!</strong> ${q.explanation}`;
-            } else {
-                feedbackBox.className = "mt-6 p-4 rounded-xl bg-red-100 text-red-800 text-xs sm:text-sm border border-red-200";
-                feedbackBox.innerHTML = `<strong>Incorreto.</strong> ${q.explanation}`;
-            }
-
-            document.getElementById('quiz-next-btn').classList.remove('hidden');
         }
 
-        function nextQuestion() {
-            quizIndex += 1;
-            if(quizIndex < quizQuestions.length) {
-                renderQuestion();
+        function renderBacklog() {
+            const container = document.getElementById('backlog-cards-container');
+            if (!container) return;
+
+            container.innerHTML = backlogStories.map((story, idx) => `
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3 hover:border-purple-300 transition">
+                    <div class="flex justify-between items-center">
+                        <span class="text-[10px] font-bold uppercase bg-purple-100 text-purple-700 px-2 py-0.5 rounded">Prioridade #${idx + 1}</span>
+                        <span class="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-md">${story.points} Points</span>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-sm">${story.title}</h4>
+                    <p class="text-xs text-slate-500">${story.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderPlanningCards() {
+            const container = document.getElementById('planning-cards-container');
+            if (!container) return;
+
+            container.innerHTML = backlogStories.map(story => {
+                const isSelected = selectedStories.includes(story.id);
+                return `
+                    <div onclick="toggleStorySelection(${story.id})" class="cursor-pointer border-2 p-4 rounded-xl space-y-2 transition ${
+                        isSelected ? 'border-indigo-600 bg-indigo-50/50 shadow-sm' : 'border-slate-200 bg-white hover:border-slate-300'
+                    }">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-semibold text-slate-500">${story.role}</span>
+                            <span class="text-xs font-extrabold bg-indigo-600 text-white px-2.5 py-0.5 rounded-full">${story.points} Story Points</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">${story.title}</h4>
+                        <p class="text-xs text-slate-500">${story.desc}</p>
+                        <div class="pt-2 text-right">
+                            <span class="text-xs font-bold ${isSelected ? 'text-indigo-600' : 'text-slate-400'}">
+                                ${isSelected ? '<i class="fa-solid fa-circle-check"></i> Selecionado' : '+ Adicionar à Sprint'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            updatePlanningCounter();
+        }
+
+        window.toggleStorySelection = function(storyId) {
+            const index = selectedStories.indexOf(storyId);
+            if (index > -1) {
+                selectedStories.splice(index, 1);
             } else {
-                showQuizResults();
+                selectedStories.push(storyId);
+            }
+            renderPlanningCards();
+        };
+
+        function updatePlanningCounter() {
+            const totalPoints = selectedStories.reduce((sum, id) => {
+                const s = backlogStories.find(item => item.id === id);
+                return sum + (s ? s.points : 0);
+            }, 0);
+
+            const counterEl = document.getElementById('selected-points-counter');
+            const alertEl = document.getElementById('planning-alert');
+
+            if (counterEl) counterEl.innerText = totalPoints;
+
+            if (alertEl) {
+                if (totalPoints > sprintMaxCapacity) {
+                    alertEl.className = "p-4 rounded-xl text-sm font-medium bg-red-100 text-red-800 border border-red-200";
+                    alertEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1"></i> Capacidade excedida (${totalPoints} pts > 13 pts). Remova alguma história para continuar.`;
+                    alertEl.classList.remove('hidden');
+                } else if (totalPoints === 0) {
+                    alertEl.className = "p-4 rounded-xl text-sm font-medium bg-amber-100 text-amber-800 border border-amber-200";
+                    alertEl.innerHTML = `<i class="fa-solid fa-info-circle mr-1"></i> Selecione ao menos 1 história para a Sprint.`;
+                    alertEl.classList.remove('hidden');
+                } else {
+                    alertEl.className = "p-4 rounded-xl text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                    alertEl.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Planejamento saudável! (${totalPoints} pts de 13 pts máxima).`;
+                    alertEl.classList.remove('hidden');
+                }
             }
         }
 
-        function showQuizResults() {
-            document.getElementById('quiz-box').classList.add('hidden');
-            const resCard = document.getElementById('quiz-result');
-            resCard.classList.remove('hidden');
+        window.startSprintExecution = function() {
+            const totalPoints = selectedStories.reduce((sum, id) => {
+                const s = backlogStories.find(item => item.id === id);
+                return sum + (s ? s.points : 0);
+            }, 0);
 
-            document.getElementById('quiz-final-score').innerText = `${quizScore} / ${quizQuestions.length}`;
+            if (totalPoints === 0 || totalPoints > sprintMaxCapacity) {
+                return;
+            }
 
-            const iconEl = document.getElementById('quiz-result-icon');
-            const titleEl = document.getElementById('quiz-result-title');
-            const descEl = document.getElementById('quiz-result-desc');
+            // Setup backlog stories for Kanban
+            backlogStories.forEach(story => {
+                if (selectedStories.includes(story.id)) {
+                    story.status = 'todo';
+                }
+            });
 
-            if(quizScore === 5) {
-                iconEl.className = "w-20 h-20 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-4xl mx-auto";
-                iconEl.innerHTML = '<i class="fa-solid fa-trophy"></i>';
-                titleEl.innerText = "Mestre do Scrum!";
-                descEl.innerText = "Parabéns! Você domina completamente os papéis, ceremônias e artefatos da metodologia Scrum.";
-            } else if(quizScore >= 3) {
-                iconEl.className = "w-20 h-20 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-4xl mx-auto";
-                iconEl.innerHTML = '<i class="fa-solid fa-thumbs-up"></i>';
-                titleEl.innerText = "Bom Trabalho!";
-                descEl.innerText = "Você tem um ótimo entendimento do Scrum. Revise algumas ceremônias para gabaritar na próxima.";
-            } else {
-                iconEl.className = "w-20 h-20 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-4xl mx-auto";
-                iconEl.innerHTML = '<i class="fa-solid fa-book-open"></i>';
-                titleEl.innerText = "Continue Praticando";
-                descEl.innerText = "Recomendamos navegar pelo Simulador e pelas abas de Ceremônias para reforçar os conceitos.";
+            currentDay = 1;
+            sprintActive = true;
+            hasImpediment = false;
+
+            renderKanban();
+            updateDailyDisplay();
+            nextStep();
+        };
+
+        function renderKanban() {
+            const todoContainer = document.getElementById('kanban-todo');
+            const doingContainer = document.getElementById('kanban-doing');
+            const doneContainer = document.getElementById('kanban-done');
+
+            if (!todoContainer || !doingContainer || !doneContainer) return;
+
+            const todoList = backlogStories.filter(s => selectedStories.includes(s.id) && s.status === 'todo');
+            const doingList = backlogStories.filter(s => selectedStories.includes(s.id) && s.status === 'doing');
+            const doneList = backlogStories.filter(s => selectedStories.includes(s.id) && s.status === 'done');
+
+            document.getElementById('count-todo').innerText = todoList.length;
+            document.getElementById('count-doing').innerText = doingList.length;
+            document.getElementById('count-done').innerText = doneList.length;
+
+            const cardTemplate = (story) => `
+                <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm text-xs space-y-1">
+                    <div class="flex justify-between font-bold">
+                        <span class="text-slate-800">${story.title}</span>
+                        <span class="text-indigo-600">${story.points}pt</span>
+                    </div>
+                </div>
+            `;
+
+            todoContainer.innerHTML = todoList.map(cardTemplate).join('') || '<p class="text-[11px] text-slate-400 italic">Nenhum item</p>';
+            doingContainer.innerHTML = doingList.map(cardTemplate).join('') || '<p class="text-[11px] text-slate-400 italic">Nenhum item</p>';
+            doneContainer.innerHTML = doneList.map(cardTemplate).join('') || '<p class="text-[11px] text-slate-400 italic">Nenhum item</p>';
+        }
+
+        window.advanceDay = function() {
+            if (!sprintActive || hasImpediment) return;
+
+            if (currentDay < 10) {
+                currentDay++;
+
+                // Trigger an impediment on Day 4 for interactive teaching
+                if (currentDay === 4) {
+                    hasImpediment = true;
+                    showImpediment("O ambiente de testes caiu e a API de pagamento está fora do ar. Desenvolvedores estão bloqueados!");
+                } else {
+                    // Progressively move tasks
+                    progressTasks();
+                }
+
+                updateDailyDisplay();
+                renderKanban();
+            }
+        };
+
+        function showImpediment(msg) {
+            const box = document.getElementById('impediment-box');
+            const text = document.getElementById('impediment-text');
+            if (box && text) {
+                text.innerText = msg;
+                box.classList.remove('hidden');
             }
         }
+
+        window.resolveImpediment = function() {
+            hasImpediment = false;
+            const box = document.getElementById('impediment-box');
+            if (box) box.classList.add('hidden');
+            progressTasks();
+            updateDailyDisplay();
+            renderKanban();
+        };
+
+        function progressTasks() {
+            const activeStories = backlogStories.filter(s => selectedStories.includes(s.id));
+            if (currentDay === 2) {
+                if (activeStories[0]) activeStories[0].status = 'doing';
+            } else if (currentDay === 4) {
+                if (activeStories[0]) activeStories[0].status = 'done';
+                if (activeStories[1]) activeStories[1].status = 'doing';
+            } else if (currentDay === 7) {
+                if (activeStories[1]) activeStories[1].status = 'done';
+                if (activeStories[2]) activeStories[2].status = 'doing';
+            } else if (currentDay === 10) {
+                activeStories.forEach(s => s.status = 'done');
+            }
+        }
+
+        function updateDailyDisplay() {
+            const dayDisplay = document.getElementById('current-day-display');
+            const progressBar = document.getElementById('sprint-progress-bar');
+            const btnAdvance = document.getElementById('btn-advance-day');
+            const btnToReview = document.getElementById('btn-to-review');
+            const dailyTitle = document.getElementById('daily-status-title');
+
+            if (dayDisplay) dayDisplay.innerText = currentDay;
+            if (progressBar) progressBar.style.width = `${(currentDay / 10) * 100}%`;
+
+            if (currentDay === 10) {
+                if (dailyTitle) dailyTitle.innerText = "Sprint Concluída! (10/10 Dias)";
+                if (btnAdvance) {
+                    btnAdvance.disabled = true;
+                    btnAdvance.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+                if (btnToReview) {
+                    btnToReview.disabled = false;
+                    btnToReview.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+
+                // Update review summary data
+                const plannedPoints = selectedStories.reduce((sum, id) => sum + backlogStories.find(s => s.id === id).points, 0);
+                const deliveredPoints = backlogStories.filter(s => selectedStories.includes(s.id) && s.status === 'done').reduce((sum, s) => sum + s.points, 0);
+
+                const plannedEl = document.getElementById('review-planned-pts');
+                const deliveredEl = document.getElementById('review-delivered-pts');
+                const feedbackText = document.getElementById('stakeholder-feedback-text');
+
+                if (plannedEl) plannedEl.innerText = `${plannedPoints} pts`;
+                if (deliveredEl) deliveredEl.innerText = `${deliveredPoints} pts`;
+
+                if (feedbackText) {
+                    if (deliveredPoints === plannedPoints) {
+                        feedbackText.innerText = '"Excelente trabalho! O time cumpriu 100% da Meta da Sprint e o software está pronto para os usuários finais."';
+                    } else {
+                        feedbackText.innerText = '"Bom progresso! Embora nem tudo tenha sido entregue, as funcionalidades prontas trazem grande valor ao negócio."';
+                    }
+                }
+            } else {
+                if (dailyTitle) dailyTitle.innerText = `Executando Dia ${currentDay} da Sprint...`;
+            }
+        }
+
+        window.selectActionPlan = function(planKey) {
+            selectedActionPlan = planKey;
+            const buttons = ['pair', 'refine', 'automation'];
+
+            buttons.forEach(key => {
+                const btn = document.getElementById(`action-plan-${key}`);
+                if (btn) {
+                    if (key === planKey) {
+                        btn.className = "action-plan-btn p-5 border-2 border-indigo-600 rounded-2xl text-left bg-indigo-50/60 shadow-sm space-y-2";
+                    } else {
+                        btn.className = "action-plan-btn p-5 border-2 border-slate-200 rounded-2xl text-left hover:border-indigo-500 transition space-y-2 bg-slate-50";
+                    }
+                }
+            });
+
+            const feedback = document.getElementById('retrospective-feedback');
+            const finishBtn = document.getElementById('btn-finish-sprint');
+
+            if (feedback) {
+                feedback.classList.remove('hidden');
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 mr-2"></i> Plano de ação definido para a próxima Sprint!`;
+            }
+
+            if (finishBtn) {
+                finishBtn.disabled = false;
+                finishBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        };
+
+        window.finishSprint = function() {
+            window.switchTab('quiz');
+        };
+
+        // Quiz Logic
+        function renderQuiz() {
+            const container = document.getElementById('quiz-card-container');
+            if (!container) return;
+
+            const q = quizQuestions[currentQuizIndex];
+            const isAnswered = answeredQuestions[currentQuizIndex] !== undefined;
+            const selectedOpt = answeredQuestions[currentQuizIndex];
+
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center text-xs font-bold text-slate-500">
+                        <span>Pergunta ${currentQuizIndex + 1} de ${quizQuestions.length}</span>
+                        <span>Progresso: ${Math.round(((currentQuizIndex + 1) / quizQuestions.length) * 100)}%</span>
+                    </div>
+
+                    <h3 class="font-bold text-slate-800 text-lg">${q.question}</h3>
+
+                    <div class="space-y-2">
+                        ${q.options.map((opt, idx) => {
+                            let btnStyle = "border-slate-200 bg-white hover:border-indigo-400 text-slate-700";
+                            if (isAnswered) {
+                                if (idx === q.correct) {
+                                    btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold";
+                                } else if (idx === selectedOpt) {
+                                    btnStyle = "border-red-500 bg-red-50 text-red-900";
+                                } else {
+                                    btnStyle = "border-slate-200 opacity-50 bg-slate-50 text-slate-500";
+                                }
+                            }
+
+                            return `
+                                <button onclick="selectAnswer(${idx})" ${isAnswered ? 'disabled' : ''} class="w-full text-left p-4 rounded-xl border-2 transition ${btnStyle}">
+                                    <span class="font-bold mr-2">${String.fromCharCode(65 + idx)}.</span> ${opt}
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+
+                    ${isAnswered ? `
+                        <div class="p-4 rounded-xl bg-slate-900 text-white text-xs space-y-1">
+                            <p class="font-bold text-indigo-300">Explicação:</p>
+                            <p class="text-slate-300 leading-relaxed">${q.explanation}</p>
+                        </div>
+
+                        <div class="flex justify-end">
+                            ${currentQuizIndex < quizQuestions.length - 1 ? `
+                                <button onclick="nextQuestion()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-xl transition">
+                                    Próxima Pergunta <i class="fa-solid fa-arrow-right ml-1"></i>
+                                </button>
+                            ` : `
+                                <button onclick="restartQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl transition">
+                                    <i class="fa-solid fa-rotate-right mr-1"></i> Reiniciar Quiz
+                                </button>
+                            `}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            const scoreDisplay = document.getElementById('quiz-score-display');
+            if (scoreDisplay) scoreDisplay.innerText = `${quizScore} / ${quizQuestions.length}`;
+        }
+
+        window.selectAnswer = function(optIdx) {
+            if (answeredQuestions[currentQuizIndex] !== undefined) return;
+
+            answeredQuestions[currentQuizIndex] = optIdx;
+            if (optIdx === quizQuestions[currentQuizIndex].correct) {
+                quizScore++;
+            }
+            renderQuiz();
+        };
+
+        window.nextQuestion = function() {
+            if (currentQuizIndex < quizQuestions.length - 1) {
+                currentQuizIndex++;
+                renderQuiz();
+            }
+        };
+
+        window.restartQuiz = function() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            answeredQuestions = {};
+            renderQuiz();
+        };
 
         window.onload = function() {
-            renderSimStep(1);
+            renderBacklog();
+            renderPlanningCards();
+            renderQuiz();
+            window.switchTab('simulador');
         };
     </script>
 </body>
